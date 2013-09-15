@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="Jonathan rodriguez Alejos " />
+<meta name="description" content="Nuestra pasión es la salud y nuestro objetivo es dar a conocer temas relacionados para que nuestra comunidad tenga un sano existir, siguenos! "/>
+
+<title>{%block title%} Bienvenido! {%endblock%}</title>
+<link rel="stylesheet" href="/media/css/pagina.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/banner.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/lytebox.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/jquery.powertip.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart-buttons.css" type="text/css"/>
+
+<link href="http://www.infosalud.co.ve/images/logo.ico" type="image/x-icon" rel="shortcut icon" />
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="/media/js/lytebox.js"></script>
+<script type="text/javascript" src="/media/js/jquery.powertip-1.1.0.min.js"></script>
+<script type="text/javascript" src="/media/js/jquery.powertip.js"></script>
+<script type="text/javascript" src="/media/js/prettify.js"></script>
+<script type="text/javascript" src="/media/js/kickstart.js"></script>
+
+{%block header %}{%endblock%}
+
+
+</head>
+<body>
+	
+<div id="all">
+	<div id="page">
+		<div id="header">
+			<a href="/"><img  src="/media/images/infosalud.png" width="50px" height="50px"/>
+			<div id="titulo_infosalud"><h1 id="nuevo_titulo_infosalud">Info<span>Salud</span></h1></div></a>
+			{%if  user.is_authenticated %}
+   				 <div id="login">
+   				 	{%if user.first_name != ''%}
+   					 	<h2>Bienvenido {{ user.first_name }} {{user.last_name}}</h2><br>
+   					 {%else%}
+   					 	<h2>Por favor complete sus datos.</h2>
+   					 {%endif%}
+                        {% if  user.get_profile.photo%}
+                         <img src="/media/{{ user.get_profile.photo }}" width="70" height="70">
+                        {% else %}
+                            <img src="/media/images/infosalud.png" alt="infosalud" title="InfoSalud" width="70" height="70"/>
+
+                        {%  endif %}
+
+                    <div id="datos_login">
+                            <a href="/ver_perfil/{{user.id}}" />Mi perfil</a>|
+                            <a href="/logout/" style="color:#CC3333;" />Salir</a>
+
+                    </div>
+        			<form action="/logout/" method="POST">
+            			{% csrf_token %}
+        			</form>
+    			</div>
+			{%else%}
+				<div id="login">
+					<form action="." method="POST">
+						{% csrf_token %}
+    					{{ form }}
+						<input type="submit" value="Entrar"/>
+						<a href=".">¿Olvidaste tu contraseña?</a>
+						<a href="{% url vista_seleccionar_registrar %}">Registrate gratis!</a>
+					</form>
+				</div>
+			{%endif%}
+		</div>
+		<div id="menu">
+			<ul>
+			   <li class='active '><a href='/'><span>Inicio</span></a></li>
+			   <li class='has-sub '><a href='#' id="prueba"><span>Servicios</span></a>
+	      	<ul>
+		        <li><a href='#'><span>Calcula tu peso ideal</span></a></li>
+		        <li><a href='#'><span>Conoce a quien puede donar</span></a></li>
+	      	</ul>
+	   		</li>
+			   <li><a href='/noticias/pagina/1/'><span>Noticias</span></a></li>
+			   <li><a href='/recetas/pagina/1/'><span>Recetas</span></a></li>
+			   <li><a href='/glosario/pagina/1/'><span>Glosario</span></a></li>
+			   <li><a href='/contacto/'><span>Contactanos</span></a></li>
+			</ul>
+
+		</div>
+
+		<div id="home">
+			<div id="rigthbar_noticia">
+
+				
+					
+					{%block apps%}
+					{%endblock%}
+
+				
+			</div>
+			<div id="content">
+				{%block content%}
+				{%endblock%}
+
+			</div>
+           
+		</div>
+		 {% block paginator %}
+            {% endblock %}
+		<div id"footer"></div>
+	</div>
+</div> 
+<div id="fb-root"></div>
+{%block final_script%}{%endblock%}
+{%block contadores%}{%endblock%}
+</body>
+</html>

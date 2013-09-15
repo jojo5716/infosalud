@@ -1,0 +1,42 @@
+{%if yo%}
+    {%if mensaje%}
+    <p>Haz click para ver un mensaje.</p>
+
+    	{%for x in mensajes%}
+    	<a href="/leer/mensaje/medico/{{x.id}}/{{medico}}" class="mensaje">
+    		<div class="mensaje_completo">
+    			<div class="titulo_mensaje">{{x.titulo|truncatechars:10}} </div>
+    			<div class="contenido_mensaje"> {{x.mensaje|truncatechars:20}}</div>
+    			<div class="fecha_mensaje">{{x.fecha_publicacion}}</div>
+    			<div class="status_mensaje">{%if x.leido%} Leído {%else%} Sin leer {%endif%}</div>
+    		</div>
+    	</a>
+    	{%endfor%}
+    {%else%}
+    	<p>No tienes mensajes por el momento.</p>
+    {%endif%}
+{%endif%}
+
+<script type="text/javascript">
+  $(function() {
+        $('.mensaje').click(function(ev){   
+            ev.preventDefault();
+            var link = $('.mensaje').attr('href')
+          $.ajax({
+                    url:link,
+                    type: "GET",
+                    data: {},
+                    async: false,
+                    success: function(data){
+                        $('#mostrar_info_perfil').fadeOut(1000);
+                        $('#mostrar_info_perfil').html(data)
+                        $('#mostrar_info_perfil').fadeIn(1000);
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert(thrownError);
+                    },
+                });
+        });
+      });
+
+</script>

@@ -1,0 +1,19 @@
+{%if yo%}
+<div id="leer_mensaje">
+	<div id="imagen_emisor"><img src="../media/{{perfil_autor.photo}}" /></div>
+	<div id="leer_contenido">
+		<div id="nombre_autor">{{autor.first_name}} {{autor.last_name}} - {{autor.email}}</div>
+		<div id="datos_mensaje">{{mensaje.fecha_publicacion}}</div>
+		<hr class="alt2"/>
+		<div id="titulo_mensaje">{{mensaje.titulo}}</div>
+		<div id="contenido_mensaje">{{mensaje.mensaje}}</div>
+
+	</div>
+		<form action="/leer/mensaje/medico/{{id_mensaje}}/{{id_medico}}" method="POST">
+			{%csrf_token%}
+			{{form.mensaje}}<br/>
+			<input type="submit" value="responder" class="blue" />
+		</form>
+</div>
+
+{%endif%}

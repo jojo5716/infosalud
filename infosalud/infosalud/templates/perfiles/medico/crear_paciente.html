@@ -1,0 +1,6 @@
+{{mensaje}}
+<form action="/crear_paciente/" method="POST" autocomplete="on">
+        {%  csrf_token %}
+        {{ register_form.as_p }}
+        <input type="submit" value="Crear paciente" id="actualizar" class="button orange act_info" style="margin:30px 0 0 10px;"/>
+</form>

@@ -1,0 +1,49 @@
+{%if info_enviado%}
+<div style='margin-top:37px;color:#77C01D;' ><div style='font-size:20px;'>Felicidades! <br/> Tu mensaje ha sido creado con exito.</div></div>
+{%else%}
+<form action="/contactar_medico/{{id_medico}}" autocomplete="on" method="POST" id="form_contacto">
+	{%  csrf_token %}
+	<fieldset id="field">
+        <input type="hidden" value="{{id_medico}}" id="id_medico" />
+    <h1 class="titulos">Titulo del mensaje</h1>
+        <h5>Escribe un motivo o titulo para tu mensaje.</h5>
+		{{form.titulo}}
+    <h1 class="titulos">Contenido del mensaje</h1>
+        <h5>Escribe por cual razon estas contactando este medico.</h5>
+        {{form.mensaje}}
+    <h1 class="titulos">Enviar mensaje</h1>
+		<input type="submit" class="blue" value="Enviar mensaje"/>
+	</fieldset>
+</form>
+{%endif%}
+
+<script type="text/javascript">
+        $('#form_contacto').submit(function(ev) { // catch the form's submit event
+            ev.preventDefault();
+            var categoria = $('#select1 option:selected').text()
+            $.ajax({ // create an AJAX call...
+                data: $(this).serialize(), // get the form data
+                type: $(this).attr('method'), // GET or POST
+                url: $(this).attr('action'), // the file to call
+                success: function(response) { // on success..
+                    $('#mostrar_info_perfil').html("<div style='margin-top:37px;color:#77C01D;' ><div style='font-size:20px;'>Felicidades! <br/> Tu mensaje ha sido enviado con exito.</div></div>");
+                }
+            });
+            return false;
+        });
+</script>
+<style type="text/css">
+.titulos{
+    background-color:#B6D6E2;
+    color:#3D7489;
+    font-size: 2em;
+    text-align: center;
+}
+.comas{
+    color: #CC3333;
+    font-size: 45px;
+}
+#id_titulo{
+    width: 300px;
+}
+</style>

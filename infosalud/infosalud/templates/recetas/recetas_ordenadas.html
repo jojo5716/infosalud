@@ -1,0 +1,106 @@
+{%extends 'noticia/base.html' %}
+{% block title%} Todas las recetas de InfoSalud {%endblock%}
+{%block titulo_pagina%}Recetas InfoSalud{%endblock%}
+{%block header%}
+<link rel="stylesheet" href="/media/css/sticky.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/noticias_all.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/jquery.jscrollpane.css" type="text/css"/>
+<script type="text/javascript" src="/media/js/jquery.jscrollpane.min.js"></script>
+<script type="text/javascript" src="/media/js/scroll.js"></script>
+<style type="text/css">
+.paper a{
+    color:#3D7489;
+}
+.page a:hover{
+    color: #E36F26;
+}
+.categoria li{
+    display: block;
+    float: left;
+    width: 90px;
+}
+</style>
+
+{%endblock%}
+
+{% block paginator %}
+    {% if receta %}
+    <span class="step-links" style="width:900px; display:block; margin:35px; text-align:left;text-align:center;">
+    <a href="/recetas/pagina/1/"> << </a>
+
+            {% if receta.has_previous %}
+                <a href="/ordenar_receta/{{seccion}}/{{orden}}/{{ receta.previous_page_number }}/">Primero </a>
+            {% else %}
+                <b>Anterior </b>
+            {% endif %}
+            <span class="current">
+            Página {{ receta.number }} de {{ receta.paginator.num_pages }}
+        </span>
+            {% if receta.has_next %}
+                <a href="/ordenar_receta/{{seccion}}/{{orden}}/{{receta.next_page_number }}/"> > </a>
+            {% else %}
+                <b>Siguiente</b>
+            {% endif %}
+            <a href="/ordenar_receta/{{seccion}}/{{orden}}/{{receta.paginator.num_pages }}/"> >> </a>
+    </span>
+    {% endif %}
+{% endblock %}
+{%block content%}
+<div class="noticias_all">
+    <ul class="slideshow" width="585" height="282" >
+<li><img src="http://placehold.it/550x350/4D99E0/ffffff.png&text=Info%20Salud" width="585" height="282" /></li>
+<li><img src="http://placehold.it/550x350/75CC00/ffffff.png&text=Info%20Salud" width="585" height="282" /></li>
+<li><img src="http://placehold.it/550x350/E49800/ffffff.png&text=Info%20Salud" width="585" height="282" /></li>
+
+</ul>
+<h1 id="titulo_orden_noti">Recetas ordenadas por {{seccion}}</h1><br/>
+{%if receta%}
+        {%for x in receta %}
+            <div id="noticia_completa">
+                <div id="texto_adicional"><img src="/media/images/infosalud_pequeno.png" height="30" width="130"/> <span class="recomienda_noti" Recomienda</span></div>
+                <div id="datos_noticia_completa">
+                    <img src="/media/{{x.imagen}}" class="imagen_noti"/>
+                    <div class="cont_noti"><span style="color: rgb(61, 116, 137); margin: 10px 0px 0px 17px;">Titulo: </span>{{x.titulo}}</div><br/>
+                    <div class="cont_noti"><span style="color: rgb(61, 116, 137);">Fecha:</span>{{x.tiempo_registro}}</div>
+                </div>
+                <a href="/receta/{{x.id}}"><div class="ver_noti_boton">Ver receta</div></a>
+            </div>
+        {%endfor%}
+{%else%}
+<h1 id="titulo_orden_noti" style="margin-top:20px;">No hay recetas</h1><br/>
+{%endif%}
+</div>
+{%endblock%}
+
+{%block apps%}
+<div id="barra">
+<div class="rectangle"><h2>Datos adicionales</h2></div>
+<div class="triangle-l"></div>
+<div class="triangle-r"></div>
+<p>Busca tus noticias favoritas por categoria</p>
+ {%if cate%}
+{%for v in cate %}
+<a href="/ordenar_receta/categoria/{{v.id|lower}}/1/">{{v.categoria}}</a>
+{%endfor%}
+{%else%}
+No existen categorias.
+{%endif%}
+
+<br/>
+<br/>
+<p>Tambien pudes ver las noticias en orden de mas votadas</p>
+<a href="/ordenar_receta/votos/mas/1/">Mas votadas</a>
+<a href="/ordenar_receta/votos/menos/1/">Menos votadas</a>
+<br/>
+<br/>
+<p>Ordena las noticias por orden de creacion</p>
+<a href="/ordenar_receta/id/id/1/">Ultimas noticias</a>
+<a href="/ordenar_receta/id/mid/1/">Primera noticias</a>
+</div>
+
+{%endblock%}
+{%block final_script%}
+
+
+
+{%endblock%}

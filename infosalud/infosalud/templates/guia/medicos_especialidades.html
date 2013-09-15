@@ -1,0 +1,101 @@
+{%extends 'guia/base.html' %}
+{%block header %}
+<meta name="keywords" content="salud, bienestar, medicina, dia, informacion, info, medicina,infosalud,infosalud.co.ve, noticias, recetas" />
+<meta name="ROBOTS" content="INDEX,FOLLOW" />
+<link rel="stylesheet" href="/media/css/editar_perfil.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart.css" type="text/css"/>
+<script type="text/javascript" src="/media/js/kickstart.js"></script>
+<script type="text/javascript" src="/media/js/prettify.js"></script>
+<link rel="stylesheet" href="/media/css/glosario.css" type="text/css"/>
+
+<link rel="stylesheet" href="/media/css/presentationCycle.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/style_presentacion_circulos.css" type="text/css"/>
+
+<script type="text/javascript" src="/media/js/jquery.cycle.all.min.js"></script>
+<script type="text/javascript" src="/media/js/presentationCycle.js"></script>
+
+{%endblock%}
+{% block title%}Especialidades medicas {%endblock%}
+
+
+{%block content%}
+<style type="text/css">
+.titulo{
+	background-color:#B6D6E2;
+  	color:#3D7489;
+  	font-size: 2em;
+  	text-align: center;
+}
+.desc{
+	font-size: 12px;
+}
+#especialidades li{
+	float: left;
+	margin-right: 30px;
+	font-size: 25px;
+}
+#especialidades li:hover{
+	color: #80B8CE;
+}
+</style>
+        <div class="container">
+    
+        <h1 class="titulo">Como buscar tu medico</h1>
+        
+        <div id="presentation_container" class="pc_container">
+
+            <div class="pc_item">
+               
+                <img src="/media/images/guia_presentacion/encuentraMedicos/guia1.png" alt="Guia" />
+            </div>
+            <div class="pc_item">
+                <div class="desc" style="left: 0px;">
+                    <h1>Selecciona la especialidad que deseas</h1>
+                    <p></p>
+                </div>
+                <img src="/media/images/guia_presentacion/encuentraMedicos/guia2.png" alt="Guia" />
+            </div>
+            <div class="pc_item">
+                <div class="desc" style="left: 165px;">
+                    <h1>Selecciona el municipio</h1>
+                    
+                </div>
+                <img src="/media/images/guia_presentacion/encuentraMedicos/guia3.png" alt="Guia" />
+            </div>
+            <div class="pc_item">
+                <div class="desc">
+                    <h1>Mario Finds Peach</h1>
+                    Consectetur adipiscing elit. Nunc quis tellus eros.
+                    Nam blandit diam id turpis bibendum nec rutrum dui pulvinar. Quisque fermentum,
+                    dolor ut adipiscing suscipit, leo lorem malesuada mauris, vitae dapibus mi
+                    ligula ut nunc.
+                </div>
+                <img src="images/slide5.jpg" alt="slide5" />
+            </div>
+            <div class="pc_item">
+                <div class="desc">
+                    <h1>Said and Done</h1>
+                    Consectetur adipiscing elit. Nunc quis tellus eros.
+                    Nam blandit diam id turpis bibendum nec rutrum dui pulvinar. Quisque fermentum,
+                    dolor ut adipiscing suscipit, leo lorem malesuada mauris, vitae dapibus mi
+                    ligula ut nunc.
+                </div>
+                <img src="images/slide6.jpg" alt="slide6" />
+            </div>
+        </div>
+        
+        <script type="text/javascript">
+            presentationCycle.init();
+        </script>
+    
+    </div>
+    <hr class="alt2" style="margin-top:-65px;"/>
+    <p>InfoSalud te ofrece una amplia y accesible referencia de los profesionales de la salud en el país. Inicie su búsqueda selecionando una especialidad:</p>
+    <div id="especialidades">
+	    <ul class="checks">
+	    {%for x in especialidad%}
+	    	<li><a href="/medicos_especialidad/{{x.id}}">{{x}}</a></li>
+	    {%endfor%}
+	</ul>
+	</div>
+{%endblock%}

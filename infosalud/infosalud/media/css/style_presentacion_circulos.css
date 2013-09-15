@@ -1,0 +1,13 @@
+
+.container {
+    width: 1000px;
+    margin: 80px auto;
+}
+
+h1, a {
+    color: #DE8F26;
+}
+
+p {
+    padding-bottom: 10px;
+}

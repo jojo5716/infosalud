@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+	<meta charset="utf-8">
+	<title>{%block title%}{%endblock%}</title>
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="robots" content="" />
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<link href="/media/images/logo.ico" type="image/x-icon" rel="shortcut icon" />
+	<link rel="stylesheet" href="/media/css/medico_admin/style.css" media="all" />
+<style type="text/css">
+.titulo{
+	background-color:#B6D6E2;
+  	color:#3D7489;
+  	font-size: 2em;
+  	width: 100%;
+  	text-align: center;
+  	margin-bottom: 10px;
+}
+.azul_claro{
+	color:#3D7489;
+}
+.anaranjado{
+	color: #E36F26;
+}
+.content p{
+	font-size: 20px;
+	line-height: 30px;
+}
+</style>
+	{%block header%}{%endblock%}
+
+</head>
+<body>
+	<input type="hidden" value="{{dato_user.id}}" id="id_user" />
+<div class="testing">
+<header class="main">
+	<a href="/"><h1><span style="color:#3D7489;">Info</span><span style="color:#80B8CE;"> Salud</span></h1></a>
+	<input type="text" value="Buscar" />
+</header>
+<section class="user">
+	<div class="profile-img">
+		<p><img src="/media/{{doctor.photo}}" alt="" height="40" width="40" /> Bienvenido {{dato_user.first_name}} {{dato_user.last_name}}</p>
+	</div>
+	<div class="buttons">
+		<button class="ico-font">&#59157;</button>
+ 
+		<span class="button dropdown">
+			<a href="#">Mensajes <span class="pip">{{mensajes.count}}</span></a>
+			
+		</span> 
+		<span class="button">Ayuda</span>
+		<span class="button blue"><a href="index.html">Salir</a></span>
+	</div>
+</section>
+</div>
+<nav>
+	<ul>
+		<li class="section"><a href="/panel/{{dato_user.id}}"><span class="icon">&#59176;</span> Dashboard</a></li>
+		<li>
+			<a href="pages-table.html"><span class="icon">&#128196;</span> Mis citas</a>
+			<ul class="submenu">
+				<li><a href="page-timeline.html">Ver citas</a></li>
+			</ul>	
+		</li>
+
+		<li>
+			<a href="blog-timeline.html"><span class="icon">&#59160;</span> Mensajes <span class="pip">{{mensajes.count}}</span></a>
+			<ul class="submenu">
+				<li><a href="blog-new.html">Nuevo mensaje</a></li>
+				<li><a href="blog-table.html">Ver todos los mensajes</a></li>
+			</ul>
+		</li>
+		<li><a href="users.html"><span class="icon">&#128101;</span> Mis pacientes <span class="pip">3</span></a></li>
+			<li><a href="/editar/perfil/medico/{{dato_user.id}}"><span class="icon">&#128101;</span> Mis datos personales </a>
+			<ul class="submenu">
+				<li><a href="/editar/perfil/medico/{{dato_user.id}}">Informacion basica</a></li>
+				<li><a href="/editar/consultorio/medico/{{dato_user.id}}">Informacion de consultorio</a></li>
+			</ul>	
+			</li>
+
+	</ul>
+</nav>
+{%block content%}{%endblock%}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script src="/media/js/medico_admin/custom.js"></script>
+<script src="/media/js/medico_admin/cycle.js"></script>
+<script src="/media/js/medico_admin/jquery.checkbox.min.js"></script>
+<script src="/media/js/medico_admin/flot.js"></script>
+<script src="/media/js/medico_admin/flot.resize.js"></script>
+<script src="/media/js/medico_admin/flot-time.js"></script>
+<script src="/media/js/flot-pie.js"></script>
+<script src="/media/js/medico_admin/cycle.js"></script>
+<script src="/media/js/medico_admin/jquery.tablesorter.min.js"></script>
+<script type="text/javascript">
+// Feature slider for graphs
+$('.cycle').cycle({
+	fx: "scrollHorz",
+	timeout: 0,
+    slideResize: 0,
+    prev:    '.left-btn', 
+    next:    '.right-btn'
+});
+</script>
+
+</body>
+</html>
+
+
+

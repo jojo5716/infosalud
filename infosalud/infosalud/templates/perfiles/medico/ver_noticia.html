@@ -1,0 +1,148 @@
+{%extends 'base_noticias_medicas.html' %}
+{% block title%} {{noticia.titulo}} {%endblock%}
+{%block titulo_pagina%}Noticia completa{%endblock%}
+{%block header %}
+<link rel="stylesheet" href="../media/css/noticia.css" type="text/css"/>
+<script type="text/javascript" src="../media/js/recomendar.js"></script>
+
+{%endblock%}
+{%block content%}
+
+		 	<div id="noticia" style="width:600px; height:auto; margin-top:55px; ">
+		 		<div id="titulo_noticia" style="width:600px;margin-left:0;">{{noticia.titulo}}</div>
+		 		<p style="text-align:justify; word-spacing:7px;line-height: 30px;">{{noticia.noticia}}</p>
+		 		<input type="hidden" value="{{noticia.id}}" id="hit_id"/>
+		 		<input type="hidden" value="{{noticia.n_votos}}" id="n_votos"/>
+		 		<input type="hidden" value="{{noticia.m_votos}}" id="m_votos"/>
+		 	</div>
+
+{%endblock%}
+
+{%block apps%}
+<div class="rectangle"><h2>Informacion</h2></div>
+<div class="triangle-l"></div>
+<div class="triangle-r"></div>
+	<div class="votar" style="width:250px; height:100px; border:1px solid; margin:5px 0 0 50px;"><div style="background-color:#f0f0f0; height:20px; width:250px; text-align:center; color:#E36F26;">Autor</div>
+	<div id="autor">
+<a href="/ver_perfil/{{autor.id}}">Autor:<span id="nombre">{{autor.first_name}} {{autor.last_name}}</span></a>
+</div>
+	</div>
+	<div class="votar" style="width:250px; height:100px; border:1px solid; margin:5px 0 0 50px;"><div style="background-color:#f0f0f0; height:20px; width:250px; text-align:center; color:#E36F26;">Votar</div>
+	<div>
+<div class="box" align="left">
+<a href="#" class="love" id="1">
+<span class="on_img" align="left"> Darle una <span style="color:#E36F26; font-weight:bold;">VIDA</span> </span> 
+</a>
+</div>
+</div>
+	</div>
+	<div class="compartir" style="width:250px; height:100px; border:1px solid; margin:5px 0 0 50px;"><div style="background-color:#f0f0f0; height:20px; width:250px; text-align:center; color:#E36F26;">Votar en redes sociales</div>
+	<div class="herr">
+	<div class="g-plusone" data-href="{{url}}"></div>
+	<div class="fb-like" data-href="https://www.infosalud.co.ve/noticia/{{noticia.id}}" data-send="true" data-layout="button_count" data-width="200" data-show-faces="false" data-font="lucida grande"></div>
+	</div>
+	</div>
+
+	<div class="compartir" style="width:250px; height:100px; border:1px solid; margin:5px 0 0 50px;"><div style="background-color:#f0f0f0; height:20px; width:250px; text-align:center; color:#E36F26;">Compartir</div>
+
+	<div class="herr">
+	<a href="" onClick="abrirVentana('http://www.facebook.com/share.php?u=127.0.0.1/noticia/{{noticia.id}}')"><img src="/media/images/facebook.png" alt="infosalud" class="img_redes_sociales"/></a><img src="/media/images/twitter.png" alt="infosalud" class="img_redes_sociales"/>
+	</div>
+	</div>
+
+	<div class="noticias_recomendadas" style="width:250px; height:100px; border:1px solid; margin:5px 0 0 50px;"><div style="background-color:#f0f0f0; height:20px; width:250px; text-align:center; color:#E36F26;">Noticias recomendadas</div>
+	<div class="herr">
+		<div id="not_recom"></div>
+	</div>
+	</div>
+<style type="text/css">
+#autor{
+	padding-top:20px;text-align:center;
+}
+#autor  a{
+	color: #3D7489;
+	font-size: 22px;
+}
+#autor #nombre:hover{
+	text-decoration: underline;
+	color: #80B8CE;
+}
+</style>
+
+{%endblock%}
+
+{%block scripts %}
+        
+          var recom = "{{noticia.categoria_id}}"
+          $.ajax({
+                    url:"/recomendar/",
+                    type: "GET",
+                    data: ({'recomendar':recom}),
+                    async: false,
+                    success: function(data){
+                        //alert(data)
+                        $('#not_recom').html(data)
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert(thrownError);
+                    },
+                });
+
+ $(document).ready(function()
+{
+$("span.on_img").mouseover(function ()
+{
+$(this).addClass("over_img");
+});
+
+$("span.on_img").mouseout(function ()
+{
+$(this).removeClass("over_img");
+});
+});
+
+//Show The Love
+$(function() {
+$(".love").click(function() 
+{
+var hit_id = $('#hit_id').val()
+var dataString = 'id='+ hit_id ;
+var parent = $(this);
+$(this).fadeOut(300);
+$.ajax({
+type: "GET",
+url: "/rate_noti_medico/",
+data: dataString,
+cache: false,
+success: function(html)
+{
+parent.html(html);
+parent.fadeIn(300);
+} 
+});
+return false;
+});
+});
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_ES/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+{%endblock%}
+
+{%block comments%}
+<div id="disqus_thread"></div>
+        <script type="text/javascript">
+            var disqus_shortname = 'jojo5716'; 
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+{%endblock%}

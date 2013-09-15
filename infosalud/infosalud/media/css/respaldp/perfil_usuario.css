@@ -1,0 +1,110 @@
+#barra_izquierda{
+	float: left;
+	width: 250px;
+	height: 400px;
+	background-color: #fff;
+	margin: 47px 0 0 10px;
+	padding: 21px 0 0 0;
+}
+
+#perfil_datos_usuario{
+    margin-bottom: 0px;
+    text-align: center;
+    width: 250px;
+}
+#perfil_app_usuario{
+	width: 250px;
+}
+#perfil_app_usuario ul{
+	list-style: none;
+}
+#perfil_app_usuario ul li{
+	float: left;
+	margin-left: 14px;
+}
+#app{
+	float: left;
+	margin-left: 5px;
+}
+#perfil_image{
+    float: left;
+    height: 240px;
+    margin: 10px 0 0 10px;
+    width: 230px;
+}
+
+#perfil_image_marco{
+	background-image: url("../images/retrato.png");
+    background-repeat: no-repeat;
+    height: 240px;
+    padding-left: 0;
+    padding-top: 5px;
+}
+#perfil_image_marco img{
+    height: 197px;
+    margin: 10px 0 0 15px;
+    width: 194px;
+}
+
+#recomienda{
+	margin-left: 20px;
+}
+/*    Contenido Derecho      */
+
+#contenido_derecho{
+    float: left;
+    height: auto;
+    margin-top: 13px;
+    width: 715px;
+    padding-bottom: 10px;
+}
+#contenedor_app{
+	height: 350px;
+}
+.perfil_menu{
+	width: 225px;
+	height: 320px;
+	border: 1px solid;
+	margin: 15px 0 0 10px;
+	float: left;
+}
+
+.perfil_menu img{
+	width: 215px;
+	height: 265px;
+	margin: 5px 0 0 5px;
+}
+.perfil_menu a{
+	margin-left: 55px;
+}
+
+/*        Perfil Medico   */
+
+#ubicacion {
+    color: #666666;
+    display: block;
+    height: auto;
+    line-height: 150%;
+    margin: 21px 0 0 22px;
+    position: absolute;
+    top: 420px;
+    width: 200px;
+}
+
+#mostrar_contenido{
+	height: auto;
+	width: 100%;
+}
+
+/* Editando Datos del perfil*/
+
+.datos_personales{
+width: 100px;
+margin-left: 100px;
+}
+
+#subir_imagen{
+	width: 100px;
+	height: 100px;
+	border: 4px dotted;
+}

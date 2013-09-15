@@ -1,0 +1,157 @@
+{%extends 'base.html' %}
+{%block header %}
+<meta name="keywords" content="salud, bienestar, medicina, dia, informacion, info, medicina,infosalud,infosalud.co.ve, noticias, recetas" />
+
+<meta name="ROBOTS" content="INDEX,FOLLOW" />
+
+<script src="http://www.pagodigital.com.ve/frm/js/pagodigital.js"></script>
+<script type="text/javascript" src="../media/js/twitter.js"></script>
+
+{%endblock%}
+{% block title%}Bienvenido a InfoSalud {%endblock%}
+{%block redes_sociales%}
+	<div class="social-box"> <a target="_blank" rel="nofollow" class="external" href="http://www.facebook.com/infsalud"><img width="48" height="48" alt="Fan us on Facebook" src="/media/images/facebook.png"></a><div class="social-box-text"> <span class="social-arrow"></span> <span class="social-box-descrip">Conectate al Facebook</span> <span class="social-box-count fb_count"></span></div></div>
+
+	<div class="social-box"> <a target="_blank" rel="nofollow" class="external" href="http://twitter.com/inf_salud"><img width="48" height="48" alt="Follow on Twitter" src="/media/images/twitter.png"></a><div class="social-box-text"> <span class="social-arrow"></span> <span class="social-box-descrip">Siguenos en Twitter</span> <span class="social-box-count twitter_count"></span></div></div>
+<a class='pagodigital' href="http://www.pagodigital.com.ve/frm/?id=1564">
+   <img border="0" src="media/images/dona_sms.png"></a>
+
+{%endblock%}
+{%block titulo_pagina%}Noticias{%endblock%}
+
+{%block banner%}
+
+<div id="main" class="container">
+	<div class="main_image">
+		<img src="/media/banner/donar_banner.png" alt="InfoSalud" />
+		<div class="desc">
+			<a rel="nofollow" href="#" class="collapse">InfoSalud</a>
+			<div class="block">
+				<h2>Suscribete ya! </h2>
+				
+				<p>Registrate ya en InfoSalud y te enviaremos un email con las novedades del portal. Tambien podras pedirle una cita a tus medicos favoritos. Hazlo ya, es rapido y GRATIS!</p>
+			</div>
+		</div>
+	</div>
+	<div class="image_thumb">
+		<ul>
+			{%for bn in banner%}
+			<li>
+				<a rel="nofollow" href="/media/{{bn.imagen}}"><img src="/media/{{bn.imagen}}" alt="Slowing Dow" /></a>
+				<div class="block">
+					<h2>{{bn.titulo}}</h2>
+					<small>{{bn.tiempo_registro}}</small>
+					
+					<p>{{bn.noticia}}</p>
+				</div>
+			</li>
+			{%endfor%}
+			
+		</ul>
+	</div>
+</div>
+<div class="container">
+</div>
+
+
+
+{%endblock%}
+{%block content%}
+{%if noticia1 %}	
+		 	<a href="noticia/{{noticia1.id}}">
+		 		<div id="noticia" style="width:600px; height:465px; margin-top:65px; ">
+		 			<div id="titulo_noticia">{{noticia1.titulo}}</div>
+		 			<div id="imagen_noticia" ><img src="../media/{{noticia1.imagen}}" width="300px" height="300px" /></div>
+		 			<div id="contenido_noticia">{{noticia1.noticia|truncatechars:400|safe}}</div>
+		 			<div id="botones_noticia">
+		 				<a href="#" onClick="abrirVentana('http://www.facebook.com/share.php?u=http://www.infosalud.co.ve/noticia/{{noticia1.id}}')"><img src="media/images/facebook.png" alt="infosalud" />
+		 				</a>
+		 				<img src="media/images/twitter.png" alt="infosalud" />
+		 		</div>
+		 		<div id="leerMas">
+		 			<button class="blue" onClick="parent.location='noticia/{{noticia1.id}}'">Leer noticia completa</button>
+		 		</div>
+
+		 		</div>
+		 		<div id="division"></div>
+		 	</a>
+{%else%}
+	<div id="noticia" style="width:600px; height:690px; margin-top:55px; ">
+	No hay noticias por mostrar en este momento.
+</div>
+{%endif%}
+		 	{%for notice in noticia2 %}
+		 	<a href="noticia/{{notice.id}}">
+		 		<div class="noticia_2" style="width:600px; height:200px;margin-top:20px;">
+		 			<div class="titulo_2">{{notice.titulo}}</div>
+		 			<div class="imagen_noticia_2">
+		 				<img src="/media/{{notice.imagen}}" style="width:100px; heigth:100px;"/></div>
+		 			<div class="contenido_noticia_2">{{notice.noticia|truncatechars:220|safe}}</div>
+		 			<a href="#" onClick="abrirVentana('http://www.facebook.com/share.php?u=http://www.infosalud.co.ve/noticia/{{notice.id}}')">
+		 				<div class="botones_noticia_2">
+		 					<img src="media/images/facebook.png" alt="infosalud" style="width: 30px;">
+		 			</a>
+		 				</div>
+		 			<div class="leerMas_2"><button class="blue" onClick="parent.location='noticia/{{notice.id}}'">Leer noticia completa</button></div>
+		 		</div>
+		 	</a>
+		 	{%endfor%}
+        <p style="width:600px; text-align:center; background:#F0F0F0; heigth:auto; padding:10px;"><a href="/noticias/pagina/1/"> Leer mas noticias ... </a></p>
+{%endblock%}
+
+{%block apps%}
+
+<div class="rectangle"><h2>Herramientas</h2></div>
+<div class="triangle-l"></div>
+<div class="triangle-r"></div>
+
+	
+	<a href="/media/images/sangre.png" class="lytebox" data-title="Guia del donante de sangre <br> InfoSalud"><div class="app" ><img src="media/images/bannersangre.jpg" /></div></a>
+	<div class="rectangle"><h2>Nuestros Tips</h2></div>
+<div class="triangle-l"></div>
+<div class="triangle-r"></div>
+<div id="twitterContainer"></div>
+
+{%endblock%}
+
+{%block contadores%}
+
+<script type="text/javascript">
+var f_page = 'infsalud'; 
+var t_page = 'inf_salud';
+
+
+$(document).ready(function(){
+$.getJSON('https://graph.facebook.com/'+f_page+'?callback=?', function(data) {
+var fb_count = data['likes'];
+$('.fb_count').html(fb_count+' Fans');
+});
+
+$.getJSON('http://api.twitter.com/1/users/show.json?screen_name='+t_page+'&callback=?', function(data) {
+twit_count = data['followers_count'];
+$('.twitter_count').html(twit_count+' Seguidores');
+});
+
+});
+</script>
+{%endblock%}
+
+{%block final_script%}
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/all.js#xfbml=1&appId=337294062965698";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+<script>
+            $(function(){
+                $('#twitterContainer').jGetTwitter({
+                    username: 'inf_salud'
+                });
+            });
+</script> 
+{%endblock%}

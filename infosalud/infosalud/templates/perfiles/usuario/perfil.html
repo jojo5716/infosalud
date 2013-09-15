@@ -1,0 +1,116 @@
+{%extends 'perfiles/usuario/base.html' %}
+{%block header %}
+<meta name="keywords" content="salud, bienestar, medicina, dia, informacion, info, medicina,infosalud,infosalud.co.ve, noticias, recetas" />
+<meta name="ROBOTS" content="INDEX,FOLLOW" />
+<script type="text/javascript" src="../media/js/editar_formulario.js"></script>
+
+
+<link rel="stylesheet" href="/media/css/editar_perfil.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart-buttons.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart-forms.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart-menus.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/perfil_usuario.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/ventana_modal.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/prettify.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/mensajes_medicos.css" type="text/css"/>
+
+<style type="text/css">
+   #container{background:#ebebeb;}
+ 
+.switch{
+    border:none;
+    background:left no-repeat;
+    width:105px;
+    height:46px;
+    padding:0;
+    margin:0;
+}
+ 
+.on, .off{
+    width:50px;
+    height:40px;
+    display:inline-block;
+    cursor:pointer;
+}
+ 
+.result{display:none;}
+#id_post{
+    width: 420px;
+    height: 45px;
+    margin-top: 20px;
+}
+.horario{
+  color: #E36F26;
+  font-weight: bold;
+}
+p{
+    color: #E36F26;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+p:hover{
+  background-color: #F2F2F2;
+}
+</style>
+{%endblock%}
+{% block title%}Perfil de Usuario{%endblock%}
+
+{%block content%}
+<h1 class="titulo">Suscribete en nuestro newsletter</h1>
+<form action="/ver_perfil/{{id_usuario}}" method="POST" id="form_newsletter">
+	{%csrf_token%}
+	{%if subscrito%}
+		<p>Actualmente estas suscrito en nuestro sistema de notificación de nuevas actualizaciones en InfoSalud. Si no deseas recibir mas correos electrónicos desactiva esta casilla y dale al otón de guardado.</p>
+	{%else%}
+		<p>Aun no estas suscrito en nuestro sistema de notificaciones. Puedes activarlo y mantenerte informado de manera gratuita sobre nuevos temas relacionados a la salud. </p>
+	{%endif%}
+	<div class="check">
+				{{form.newsletter}}<label for="id_newsletter">
+	</div>
+	<h1 class="titulo"> Guarda la nueva configuración</h1>
+		<input type="submit" value="Actualizar" id="actualizar"/>
+</form>
+
+{%endblock%}
+
+{%block ventana_modal_script%}
+<script type="text/javascript">
+$(document).ready(function(){
+ 
+    $('.switch').css('background', 'url("../media/images/switch.png")');
+    $('.on_off').css('display','none');
+    $('.on, .off').css('text-indent','-10000px');
+ 
+    $("input[name=on_off]").change(function() {
+      var button = $(this).val();
+       
+        if(button == 'off'){ $('.switch').css('background-position', 'right'); }
+        if(button == 'on'){ $('.switch').css('background-position', 'left'); }  
+               
+         $('.result span').html(button);
+         $('.result').fadeIn();
+ 
+   });
+ 
+});
+
+$('.toggle-button-class').toggleButtons();
+
+
+        $('#form_newsletter').submit(function(ev) { // catch the form's submit event
+            ev.preventDefault();
+            $.ajax({ // create an AJAX call...
+                data: $(this).serialize(), // get the form data
+                type: $(this).attr('method'), // GET or POST
+                url: $(this).attr('action'), // the file to call
+                success: function(response) { // on success..
+                    $('#mostrar_info_perfil').html("<div style='margin-top:37px;color:#77C01D;' ><div style='font-size:20px;'>Felicidades! <br/> tu cambio se ha realizado con éxito.</div></div>");
+                }
+            });
+            return false;
+        });
+</script>
+
+{%endblock%}

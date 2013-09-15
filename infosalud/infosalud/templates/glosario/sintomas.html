@@ -1,0 +1,103 @@
+{%extends 'glosario/base.html' %}
+{%block header %}
+<meta name="keywords" content="salud, bienestar, medicina, dia, informacion, info, medicina,infosalud,infosalud.co.ve, noticias, recetas" />
+<meta name="ROBOTS" content="INDEX,FOLLOW" />
+<link rel="stylesheet" href="/media/css/editar_perfil.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart.css" type="text/css"/>
+<script type="text/javascript" src="/media/js/kickstart.js"></script>
+<script type="text/javascript" src="/media/js/prettify.js"></script>
+<script type="text/javascript" src="/media/js/bootstrap.js"></script>
+<script type="text/javascript" src="/media/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/media/css/glosario.css" type="text/css"/>
+
+<style type="text/css">
+.titulo_glosario{
+	background-color:#B6D6E2;
+  	color:#3D7489;
+  	font-size: 2em;
+}
+.seccion:hover{
+	color: #E36F26;
+}
+#header_seccion a{
+	text-align: center;
+	color:#3D7489;
+}
+#listado_palabras{
+	width: 700px;
+	 font-size: 36px; min-height: 100px; color: #E36F26;
+}
+#listado_palabras li:hover{
+	background-color: #F5F5F5;
+}
+#activo{
+	color:#E36F26;
+}
+</style>
+{%endblock%}
+{% block title%}Lista de sintomas {%endblock%}
+
+{% block paginator %}
+    {% if sintoma %}
+    <span class="step-links" style="width:900px; display:block; margin:35px; text-align:left;padding-left:215px;">
+    <a href="/sintomas/pagina/1/"> << </a>
+
+            {% if sintoma.has_previous %}
+                <a href="/sintomas/pagina/{{ sintoma.previous_page_number }}/">Primero </a>
+            {% else %}
+                <b>Anterior </b>
+            {% endif %}
+            <span class="current">
+            Página {{ sintoma.number }} de {{ sintoma.paginator.num_pages }}
+        </span>
+            {% if sintoma.has_next %}
+                <a href="/sintomas/pagina/{{ sintoma.next_page_number }}/"> > </a>
+            {% else %}
+                <b>Siguiente</b>
+            {% endif %}
+            <a href="/sintomas/pagina/{{ sintoma.paginator.num_pages }}/"> >> </a>
+    </span>
+    {% endif %}
+{% endblock %}
+
+{%block content%}
+<div id="glosario_page">
+<div id="header_glosario">
+<img src="http://2.bp.blogspot.com/_qZZoh3MGRBs/SvtSm2DpH2I/AAAAAAAAALI/iYsGEVlRN0E/s320/glosario.gif" alt="glosario infosalud"/>
+<p>En el Glosario <span style="color:#3D7489;">Info</span>Salud podras encontrar informacion referente a <span style="color:#E36F26;">palabras medicas</span>, <span style="color:#E36F26;">sintomas</span>, <span style="color:#E36F26;">enfermedades</span> y mucho mas.</p>
+</div>
+<hr class="alt2"/>
+<div id="seccion_glosario">
+	<div class="header_seccion">Secciones</div>
+	<ul class="checks">
+	<li><a href="/glosario/pagina/1" class="seccion" >Glosario</a></li>
+	<li><a href="/enfermedad/pagina/1" class="seccion">Enfermedades</a></li>
+	<li><a href="#" class="seccion" id="activo">Sintomas</a></li>
+	<li><a href="/pruebas_medicas/pagina/1/" class="seccion">Pruebas medicas</a></li>
+</ul>
+</div>
+<h1 class="titulo_glosario">Lista de sintomas</h1>
+
+			<p>Puedes hacer una busqueda mas rapida con tan solo hacer click en una palabra del alfabeto.</p>
+			<p style="color:#E36F26; font-size:34px;">
+			{%for al in abc%}
+				<a href="/{{seccion}}/letra/{{al|lower}}/1/">{{al}}</a>
+			{%endfor%}
+			</p>
+			<div id="listado_palabras">
+				<hr class="alt2" />
+			<ul class="checks">
+				{%if sintoma%}
+				{%for x in sintoma%}
+				<li><a href="/ver_sintoma/{{x.id}}">{{x.nombre}}</a></li>
+				<hr class="alt2" />
+				{%endfor%}
+				{%else%}
+				No hay
+				{%endif%}
+			</ul>
+
+			</div>
+</div>
+
+{%endblock%}

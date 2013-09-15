@@ -1,0 +1,153 @@
+{%extends 'glosario/base_dentro.html' %}
+{% block title%} Lista de enfermedades {%endblock%}
+{%block header %}
+
+<link rel="stylesheet" href="/media/css/kickstart-buttons.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart-forms.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart-menus.css" type="text/css"/>
+<script type="text/javascript" src="../media/js/recomendar.js"></script>
+<style type="text/css">
+.titulo_glosario{
+	background-color:#B6D6E2;
+  	color:#3D7489;
+  	font-size: 2em;
+  	text-align: center;
+}
+ li:hover{
+	color:#B6D6E2;
+}
+p{
+	text-align: center;
+    word-spacing: 7px;
+}
+.titulos{
+    background-color:#77BB11;
+    color:#fff;
+    font-size: 2em;
+    text-align: center;
+}
+#enfermedad{
+	font-size: 50px;
+	font-weight: bold;
+}
+p:hover{
+	background-color: #F2F2F2;
+}
+
+a:hover{
+	color: #E36F26;
+}
+.medicos_rel{
+	width: 265px;
+	height: 400px;
+	float: left;
+	margin: 0 25px 20px 0 ; 
+}
+.medicos_rel img{
+	height: 230px;
+    margin: 30px 0 0;
+    width: 230px;
+}
+.M{
+	border: 4px solid #3D7489;
+
+}
+.F{
+	border: 4px solid #FF3366;
+
+}
+</style>
+{%endblock%}
+{%block content%}
+		 	<div id="noticia" style="width:600px; height:auto; margin-top:55px;">
+
+		 		<div id="titulo_noticia" style="width:600px;margin-left:0;position:relative; top:10px;" >
+					{%for x in enfermedad%}
+
+		 		<h1 class="titulos">Enfermedad</h1>		 		
+		 		<p id="enfermedad">{{x.nombre}}</p>
+
+		 		<h1 class="titulo_glosario">Enfermedad</h1>		 		
+		 		<p>{{x.definicion}}</p>
+				{%endfor%}
+				{%if masinfo%}
+				{%for z in masinfo%}
+					<h1 class="titulo_glosario">{{z.titulo}}</h1>
+					<p>{{z.contenido}}</p>
+				{%endfor%}
+				{%endif%}
+				{%if sintomas_rel%}
+					<h1 class="titulo_glosario">Sintomas relacionados</h1>		 		
+		 			<p style="font-size:25px; color:#E36F26;">Esta es una lista de sintomas que se relacionan a esta enfermedad.</p>
+						{%for x in sintomas_rel%}
+						
+							<p><a href="/ver_sintoma/{{x.id}}">	{{x}}</a> </p>
+						
+						{%endfor%}
+				{%else%}
+				No hay enfermedades relacionadas a esta.
+				{%endif%}
+				<h1  class="titulo_glosario">Enfermedades relacionados</h1>		 		
+		 			<p style="font-size:25px; color:#E36F26;">Esta enfermedad comparte los mismos sintomas que la siguiente lista.</p>
+		 			{%if enfermedades_rel%}
+			 			{%for z in enfermedades_rel%}
+			 					<p><a href="/ver_enfermedad/{{z.id}}">{{z}}</a></p>
+			 			{%endfor%}
+		 			{%else%}
+		 			<span style="color:#CC3333;">No existen enfermedades relacionadas a esta.</span>
+		 			{%endif%}
+		 			{%if medicos_rel%}
+		 				<h1  class="titulo_glosario">Medicos recomendados</h1>
+		 				<p style="font-size:25px; color:#E36F26;">InfoSalud te recomienda los siguientes medicos que podran tratar esta enfermedad. Podras ver su perfil y contactar con ellos.</p>
+		 				{%for x in medicos_rel%}
+		 					<div class="medicos_rel {{x.gender}}">
+		 						<img src="/media/{{x.photo}}" alt="{{x}}" width="100" height="100" />
+		 						<span>{{x}}</span>
+
+		 					</div>
+		 				{%endfor%}
+		 			{%else%}
+		 			{%endif%}
+
+
+		 	</div>
+		 </div>
+		 
+{%endblock%}
+
+{%block apps%}
+<div class="rectangle"><h2>Informacion</h2></div>
+<div class="triangle-l"></div>
+<div class="triangle-r"></div>
+	
+
+	
+	<div class="compartir" style="width:250px; height:100px; border:1px solid; margin:5px 0 0 50px;text-align:center;"><div style="background-color:#f0f0f0; height:20px; width:250px; text-align:center; color:#E36F26;">Votar en redes sociales</div>
+	<div class="herr">
+	<div class="g-plusone" data-href="http://www.infosalud.co.ve/ver_enfermedad/{{id_enfermedad}}"></div>
+	<div class="fb-like" data-href="http://infosalud.co.ve/ver_enfermedad/{{id_enfermedad}}/" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false" data-font="tahoma"></div>
+	</div>
+	</div>
+
+	<div class="compartir" style="width:250px; height:100px; border:1px solid; margin:5px 0 0 50px;text-align:center;"><div style="background-color:#f0f0f0; height:20px; width:250px; text-align:center; color:#E36F26;">Compartir</div>
+
+	<div class="herr">
+	<a href="" onClick="abrirVentana('http://www.facebook.com/share.php?u=127.0.0.1/noticia/{{noticia.id}}')"><img src="/media/images/facebook.png" alt="infosalud" class="img_redes_sociales"/></a><img src="/media/images/twitter.png" alt="infosalud" class="img_redes_sociales"/>
+	</div>
+	</div>
+
+
+
+{%endblock%}
+{%block scripts%}
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_ES/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+{%endblock%}
+
+

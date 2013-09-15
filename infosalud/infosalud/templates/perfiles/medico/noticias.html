@@ -1,0 +1,120 @@
+    <!-- {%if yo%}
+<a href="/panel/{{dato_user.id}}"><div style="width:auto; height:200px; border:1px solid;"><iframe width="100%" height="200" src="http://www.youtube.com/embed/evF_L6Dldb8" frameborder="0" allowfullscreen></iframe></div></a>
+{%endif%} -->
+{%if form_act%}
+<form action="/noticia_medico/{{user.id}}" autocomplete="on" method="POST" id="form_noticia">
+	{%  csrf_token %}
+	<fieldset id="field">
+        <h1 class="titulos">Titulo de la noticia</h1>
+            <h5>Escribe un titulo para tu noticia.</h5>
+            {{form.titulo}}
+        <h1 class="titulos">Contenido de la noticia</h1>
+            <h5>Escribe tu noticia completa.</h5>
+            {{form.noticia}}
+        <h1 class="titulos">Categoria de la noticia</h1>
+            <h5>Elige una categoria para tu noticia.</h5>
+		<select id="select1" class="categoria" style="width: 220px; height: 30px; font-size: 14px; text-align: center; padding: 3px; margin: 5px 0px 10px;" name="categoria">
+			<option value="0" disabled="disable">-- Selecciona --</option>
+			{%for x in cat%}
+			<option value="{{x.id}}">{{x.categoria}}</option>
+			{%endfor%}
+			<option value="000">otro</option>
+		</select>
+            <div id="otra_categoria" style="position:relative; top:10px; height:60px;"></div>
+        <h1 class="titulos">Envianos tu noticia</h1>
+		<input type="submit" class="blue" value="Enviar noticia"/>
+	</fieldset>
+</form>
+{%endif%}
+{%if noticia_m%}
+{%for x in noticia_m%}
+<a href="/ver_noticia_medico/{{x.id}}">
+<div id="post" style="width:auto; height:120px; border:1px solid;margin-top:25px;">
+	<img src="../media/{{doc.photo}}" width="100px" height="100px" style="float:left;margin:10px;"/>
+	<div id="content_post" style="width:600px; float:left;margin:10px; font-size:20px;color:#3D7489;text-align:left; ">
+		{{x.titulo}}
+		<div style="position:relative; bottom:-35px;left:35px;color:#E36F26;text-align:right;">
+			{{x.fecha_publicacion}}
+		</div>
+	</div>
+	
+</div></a>
+{%endfor%}
+{%else%}
+{%if yo%}
+<p style="font-size:37px; color:#3D7489;">Aun no has montado niguna NOTICIA, ¿Te gustaria escribir algun articulo o noticia para que los demas usuarios lo puedan leer? Haz <a href="#" id="noticia" style="color:#77C01D; font-size:40px;">CLICK AQUI</a> </p>
+{%else%}
+<p style="font-size:37px; color:#3D7489;">Este usuario aun no ha montado niguna NOTICIA, ¿Te gustaria enviarle un mensaje recomendandole subir alguna noticia? Haz <a href="#" id="noticia" style="color:#77C01D; font-size:40px;">CLICK AQUI</a> </p>
+{%endif%}
+{%endif%}
+<script type="text/javascript">
+
+        $('#form_noticia').submit(function(ev) { // catch the form's submit event
+            ev.preventDefault();
+            var categoria = $('#select1 option:selected').text()
+            $.ajax({ // create an AJAX call...
+                data: $(this).serialize(), // get the form data
+                type: $(this).attr('method'), // GET or POST
+                url: $(this).attr('action'), // the file to call
+                success: function(response) { // on success..
+                    $('#mostrar_info_perfil').html("<div style='margin-top:37px;color:#77C01D;' ><div style='font-size:20px;'>Felicidades! <br/> Tu noticia ha sido creado con exito.</div></div>");
+                }
+            });
+            return false;
+        });
+
+       $("#select1").change(function(ev) {// catch the form's submit event
+       	ev.preventDefault();
+        	var otro = $("#select1 option:selected").text()
+        	if(otro =="otro"){
+        		campo = "<label>Escribe una nueva categoria:</label> <input type='text' id='otro' placeholder='Escriba la nueva categoria' name='nuevaCategoria' value='' required='True' style='width:230px;'/>"
+        		$('#otra_categoria').fadeOut(1000)
+        		$('#otra_categoria').append(campo)
+        		$('#otra_categoria').fadeIn(1000)
+        	}else{
+        		$('#otro').remove()
+        	}
+
+        });
+   $('#recomendarContacto').click(function(ev){   
+            ev.preventDefault();
+        var id_medico = document.getElementById('id_user').value;  
+
+          $.ajax({
+                    url:"/contactar_medico/"+id_medico,
+                    type: "GET",
+                    data: {},
+                    async: false,
+                    success: function(data){
+                        $('#mostrar_info_perfil').fadeOut(1000);
+                        $('#mostrar_info_perfil').html(data)
+                        $('#mostrar_info_perfil').fadeIn(400);
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert(thrownError);
+                    },
+                });
+        });
+     
+</script>
+<style type="text/css">
+#post:hover{
+	background-color: #F2F2F2;
+}
+.label_form{
+	margin-right: 20px;
+}
+#form_noticia input{
+	margin-left: 20px;
+}
+.titulos{
+    background-color:#B6D6E2;
+    color:#3D7489;
+    font-size: 2em;
+    text-align: center;
+}
+.comas{
+    color: #CC3333;
+    font-size: 45px;
+}
+</style>

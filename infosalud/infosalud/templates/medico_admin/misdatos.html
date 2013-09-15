@@ -1,0 +1,57 @@
+{%extends 'medico_admin/base.html' %}
+{% block title%}Administra tus contenidos {%endblock%}
+{%block content%}
+<style type="text/css">
+#editar_basica{
+	width: 100%;
+	height: 500px;
+}
+#imagen{
+	float: left;
+	width: 20%;
+	height: 200px;
+	text-align: center;
+}
+#imagen img{
+	border-radius: 7px;
+	border: 5px solid;
+}
+#formulario{
+	float: right;
+	width: 78%;
+
+}
+#formulario input{
+	width: 50%;
+}
+#formulario label{
+	font-size: 20px;
+}
+</style>
+<section class="alert">
+	<div class="green">	
+		<p>Hola {{dato_user.first_name}}, Este es tu Gestor de Contenidos, aqui podras todo tipo de datos, como tu informacion personal, informacion sobre tus pacientes, Post, Recetas, Noticias y mucho mas! Hechale un vistazo!</p>
+		<span class="close">&#10006;</span>
+	</div>
+</section>
+
+<section class="content">	
+	<h1 class="titulo">Edita tu informacion basica.</h1>
+	<div id="editar_basica">
+			
+		<div id="imagen">
+			<img src="/media/{{doctor.photo}}" width="100%" height="92%"/><br/>
+			<a href="">Tomar foto de webcam</a>
+		</div>
+
+		<div id="formulario">
+			<form action="." method="POST">
+				<label>Email: </label>{{form.email}}
+				<input type="submit" value="Actualizar"/>
+			</form>
+		</div>
+		
+</div>
+	
+</section>
+{%endblock%}

@@ -1,0 +1,117 @@
+{%extends 'guia/base.html' %}
+{%block header %}
+<meta name="keywords" content="salud, bienestar, medicina, dia, informacion, info, medicina,infosalud,infosalud.co.ve, noticias, recetas" />
+<meta name="ROBOTS" content="INDEX,FOLLOW" />
+<link rel="stylesheet" href="/media/css/editar_perfil.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart.css" type="text/css"/>
+<script type="text/javascript" src="/media/js/kickstart.js"></script>
+<script type="text/javascript" src="/media/js/prettify.js"></script>
+<link rel="stylesheet" href="/media/css/glosario.css" type="text/css"/>
+
+<link rel="stylesheet" href="/media/css/presentationCycle.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/style_presentacion_circulos.css" type="text/css"/>
+
+<script type="text/javascript" src="/media/js/jquery.cycle.all.min.js"></script>
+<script type="text/javascript" src="/media/js/presentationCycle.js"></script>
+<style type="text/css">
+.titulo{
+    background-color:#B6D6E2;
+    color:#3D7489;
+    font-size: 2em;
+    text-align: center;
+}
+.desc{
+    font-size: 12px;
+}
+#especialidades li{
+    float: left;
+    margin-right: 30px;
+    font-size: 25px;
+}
+#especialidades li:hover{
+    color: #80B8CE;
+}
+.medico{
+    width: 200px;
+    height: 300px;
+    border: 1px dotted;
+    text-align: center;
+    float: left;
+    margin: 0 30px 30px 0;
+    font-size: 25px;
+}
+.medico img{
+    border: 3px solid #80B8CE;
+    height: 150px;
+    margin-left: 5px;
+    width: 160px;
+}
+#nohay{
+    text-align: center;
+}
+#infoguia{
+    width: auto;
+    height: auto;
+    margin-top:60px; 
+}
+.guia_app{
+    width: auto;
+    height: 305px;
+    margin-bottom: 10px;
+}
+.imagen_app{
+    float: left;
+}
+.contenido_app{
+    text-align: center;
+}
+#guias{
+color: #3D7489;
+text-align: center;
+}
+#guias span{
+    color:#E36F26;
+}
+</style>
+{%endblock%}
+{% block title%}InfoGuia {%endblock%}
+
+
+{%block content%}
+   <div id="infoguia">
+    <h1 id="guias">Disfruta de nuestra gran variedad de <span>GUIAS</span> de todo tipo.</h1>
+<a href="/registro/select/">
+<div class="guia_app">
+    <div class="imagen_app">
+        <img src="/media/images/suscribete.jpg"/>
+    </div>
+    <div class="contenido_app">
+        <div class="titulo_app titulo">Suscribete Ya</div>
+        <div class="descripcion_app">
+            <p>Disfruta de nuestra guia de plantas medicinales donde podras encontrar el siguiente contenido:</p>
+
+        </div>
+    </div>
+</div>
+</a>
+<a href="/plantas/curativas/1/">
+<div class="guia_app">
+    <div class="imagen_app">
+        <img src="/media/images/plantas_medicinales.png"/>
+    </div>
+    <div class="contenido_app">
+        <div class="titulo_app titulo">Guia de plantas medicinales</div>
+        <div class="descripcion_app">
+            <p>Registrate GRATIS en InfoSalud y disfruta de poder votar y comentar tus noticias y recetas favoritas.</p>
+            <ul class="checks">
+                <li>Propiedades</li>
+                <li>Formas de uso</li>
+                <li>Tipo de cultivo</li>
+                <li>Y mucho mas!</li>
+            </ul>
+        </div>
+    </div>
+</div>        
+</a>
+   </div>
+{%endblock%}

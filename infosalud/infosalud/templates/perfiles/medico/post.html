@@ -1,0 +1,85 @@
+    <!-- {%if yo%}
+<a href="/panel/{{dato_user.id}}"><div style="width:auto; height:200px; border:1px solid;"><iframe width="100%" height="200" src="http://www.youtube.com/embed/evF_L6Dldb8" frameborder="0" allowfullscreen></iframe></div></a>
+{%endif%} -->
+{%if form_act%}
+<form action="/post/{{user.id}}" autocomplete="on" method="POST" id="form_post">
+	<fieldset id="field">
+	{%  csrf_token %}
+    <h1 class="titulos">Escribe un nuevo Post</h1>
+        <h5>Escribe algo corto para que los usuarios lo lean.</h5>
+    {{form.post}}<br/><br/>
+	<input type="submit" class="blue" value="Enviar post"/>
+	</fieldset>
+</form>
+{%endif%}
+{%if post_m%}
+{%for x in post_m%}
+<div id="post" style="width:auto; height:120px; border:1px solid;margin-top:25px;">
+	<img src="../media/{{doc.photo}}" width="100px" height="100px" style="float:left;margin:10px;"/>
+	<div id="content_post" style="width:600px; float:left;margin:10px; font-size:20px;color:#3D7489;text-align:left; ">
+		{{x.post}}
+		<div style="position:relative; bottom:-35px;left:35px;color:#E36F26;text-align:right;">
+			{{x.fecha_publicacion}}
+		</div>
+	</div>
+	
+</div>
+{%endfor%}
+{%else%}
+{%if yo%}
+<p style="font-size:37px; color:#3D7489;">Aun no has montado nigun POST, ¿Porque no pruebas enviandole un saludo a las demas personas?</p>
+{%else%}
+<p style="font-size:37px; color:#3D7489;">Este usuario aun no ha montado nigun POST, ¿Te gustaria enviarle un mensaje recomendandole subir alguna noticia? Haz <a href="#" id="recomendarContacto" style="color:#77C01D; font-size:40px;">CLICK AQUI</a> </p>
+{%endif%}
+{%endif%}
+<script type="text/javascript">
+
+        $('#form_post').submit(function(ev) { // catch the form's submit event
+            ev.preventDefault();
+            $.ajax({ // create an AJAX call...
+                data: $(this).serialize(), // get the form data
+                type: $(this).attr('method'), // GET or POST
+                url: $(this).attr('action'), // the file to call
+                success: function(response) { // on success..
+                    $('#mostrar_info_perfil').html("<div style='margin-top:37px;color:#77C01D;' ><div style='font-size:20px;'>Felicidades! <br/> Tu post ha sido creado con exito.</div></div>");
+                }
+            });
+            return false;
+        });
+
+        $('#recomendarContacto').click(function(ev){   
+            ev.preventDefault();
+        var id_medico = document.getElementById('id_user').value;  
+
+          $.ajax({
+                    url:"/contactar_medico/"+id_medico,
+                    type: "GET",
+                    data: {},
+                    async: false,
+                    success: function(data){
+                        $('#mostrar_info_perfil').fadeOut(1000);
+                        $('#mostrar_info_perfil').html(data)
+                        $('#mostrar_info_perfil').fadeIn(400);
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert(thrownError);
+                    },
+                });
+        });
+     
+</script>
+<style type="text/css">
+#post:hover{
+	background-color: #F2F2F2;
+}
+.titulos{
+    background-color:#B6D6E2;
+    color:#3D7489;
+    font-size: 2em;
+    text-align: center;
+}
+.comas{
+    color: #CC3333;
+    font-size: 45px;
+}
+</style>

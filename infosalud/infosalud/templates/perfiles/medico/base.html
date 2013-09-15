@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="Jonathan Rodriguez Alejos " />
+<meta name="description" content="la herramienta para mantenernos zanahoria"/>
+
+<title>{%block title%} Bienvenido! {%endblock%}</title>
+<link rel="stylesheet" href="/media/css/pagina.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/banner.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/lytebox.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/jquery.powertip.css" type="text/css"/>
+
+<link href="../media/images/logo.ico" type="image/x-icon" rel="shortcut icon" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<script type="text/javascript" src="/media/js/lytebox.js"></script>
+<script type="text/javascript" src="/media/js/jquery.powertip-1.1.0.min.js"></script>
+<script type="text/javascript" src="/media/js/jquery.powertip.js"></script>
+
+{%block header %}{%endblock%}
+<script type="text/javascript">
+	function abrirVentana(url) {
+    window.open(url, "nuevo", "directories=no, location=no, menubar=no, scrollbars=yes, statusbar=no, tittlebar=no, width=400, height=400");
+}
+</script>
+<script type="text/javascript">
+$(document).ready(function() {	
+	{%block script%}{%endblock%}
+</script>
+</head>
+<body>
+	
+<div id="all">
+	<div id="page">
+		<div id="header">
+			<a href="/"><img src="/media/images/infosalud.png"/>
+			<div id="titulo_infosalud"><h1 id="nuevo_titulo_infosalud">Info<span>Salud</span></h1></div></a>
+			{%if  user.is_authenticated %}
+   				 <div id="login">
+   					 <h2>Bienvenido {{ user.first_name }} {{user.last_name}}</h2><br>
+                        {% if  user.get_profile.photo%}
+                         <img src="/media/{{user.get_profile.photo }}" width="70" height="70">
+                        {% else %}
+                            <img src="/media/images/infosalud.png" alt="infosalud" title="InfoSalud" width="70" height="70"/>
+                        {%  endif %}
+                                                
+                    <div id="datos_login">
+                            <a href="/ver_perfil/{{user.id}}" />Mi perfil</a>|
+
+                            <a href="/logout/" style="color:#CC3333;" />Salir</a>
+
+                    </div>
+        			<form action="/logout/" method="POST">
+            			{% csrf_token %}
+        			</form>
+    			</div>
+			{%else%}
+				<div id="login">
+					<form action="." method="POST">
+						{% csrf_token %}
+    					{{ form.username }} {{form.password}}
+                        <input type="submit" value="Entrar" class="blue"/>
+						<a href=".">¿Olvidaste tu contraseña?</a>
+						<a href="/registro/select/">Registrate gratis!</a>
+					</form>
+				</div>
+			{%endif%}
+		</div>
+		<div id="menu">
+			<ul>
+               <li class='active '><a href='/'><span>Inicio</span></a></li>
+               <li><a href='/infoguia/'><span>InfoGuia</span></a></li>
+               <li><a href='/noticias/pagina/1/'><span>Noticias</span></a></li>
+               <li><a href='/recetas/pagina/1/'><span>Recetas</span></a></li>
+               <li><a href='/contacto/'><span>Contactanos</span></a></li>
+			</ul>
+
+		</div>
+		<div id="home">
+			
+			<div id="content">
+
+<div id="header_perfil">
+	<div id="imagen_perfil">
+        {%if doctor.photo%}
+		<img src="../media/{{doctor.photo}}" alt=""/>
+        {%else%}
+        <img src="../media/images/infosalud.png" alt=""/>
+        {%endif%}
+        <br/>
+        {%if yo%}
+           <div style="margin:10px 10px 10px 20%;"> 
+            <input type="submit" value="Editar mi informacion" class="green" id="datos_basicos"/></div>
+        {%endif%}
+	</div>
+	<div id="datos_perfil">
+		<h1>Dr.{{dato_user.first_name}} {{dato_user.last_name}}</h1>
+		<h2>
+            {%for x in especialidades%}
+                <span>{{x}} - </span> 
+            {%endfor%}
+        </h2>
+		<h2>{{doctor.estado}} / {{doctor.municipio}} </h2>
+	</div>
+	<div id="app_perfil">
+		<ul>
+			<li>
+		<div>
+			<a href="" class="post"><span class="numero">
+				{{post_count}}
+			</span>
+			<span class="nombre">
+				Post
+			</span>
+		</div></a></li>
+		<li>
+		<div id="app_medio">
+			<a href="" class="receta"><span class="numero" >
+				{{receta_count}}
+			</span>
+			<span class="nombre" >
+				Recetas
+			</span>
+		</div></a></li>
+		<li>
+		<div id="app_final">
+			<a href="" class="noticia"><span class="numero" >
+				{{noticia_count}}
+			</span>
+			<span class="nombre">
+				Noticias
+			</span></a>
+		</div>
+		</li>
+	</div>
+</div>
+<hr class="alt2" style="margin:0 0 15px 0"/>
+<div id="menu_perfil">
+<span style="color:#777777;">Selecciona una opcion para ver su contenido</span>
+<hr class="alt2" style="margin:1px;"/>
+	{%if yo%}
+
+	<div class="contenedor_menu_perfil"><a href="">Ver mi informacion</a></div>
+<hr class="alt2" style="margin:1px;"/>
+    <div class="contenedor_menu_perfil"><a href="" id="editar_datos">Editar mi informacion</a></div>
+<hr class="alt2" style="margin:1px;"/>
+    <div class="contenedor_menu_perfil"><a href="" id="mis_mensajes">Ver mis mensajes</a></div>
+<hr class="alt2" style="margin:1px;"/>
+
+{%else%}
+	<div class="contenedor_menu_perfil"><a href=""  id="reportar" style="color:red; font-weight:bold;">Denunciar medico</a></div>
+<hr class="alt2" style="margin:1px;"/>
+	<div class="contenedor_menu_perfil"><a href="">Ver informacion</a></div>
+	
+<hr class="alt2" style="margin:1px;"/>
+	<div class="contenedor_menu_perfil"><a href="" id="contactame">Contactame</a></div>
+{%endif%}
+<hr class="alt2" style="margin:1px;"/>
+	<div class="contenedor_menu_perfil"><a href="" class="post">Posts {{post_count}}</a></div>
+<hr class="alt2" style="margin:1px;"/>
+	<div class="contenedor_menu_perfil"><a href="" class="noticia">Noticias {{noticia_count}}</a></div>
+<hr class="alt2" style="margin:1px;"/>
+	<div class="contenedor_menu_perfil"><a href="" class="receta">Recetas {{receta_count}}</a></div>
+
+</div>
+<input type="hidden" value="{{dato_user.id}}" id="id_user" />
+<div id="mostrar_info_perfil">
+
+	<!-- {%if yo%}
+<a href="/panel/{{dato_user.id}}"><div style="width:auto; height:200px; border:1px solid;"><iframe width="100%" height="200" src="http://www.youtube.com/embed/evF_L6Dldb8" frameborder="0" allowfullscreen></iframe></div></a>
+{%endif%} -->
+				{%block content%}
+				{%endblock%}
+</div>
+			</div>
+           <input type="hidden" value="{{dato_user.id}}" id="id_medico"/>
+		</div>
+		{%block ventana_modal_script%}{%endblock%}
+		<div id"footer"></div>
+	</div>
+</div> 
+<style type="text/css">
+#header_perfil a {
+	color: #E36F26;
+}
+</style>
+<script type="text/javascript">
+ $(function() {
+        $('.post').click(function(ev){   
+        	ev.preventDefault();
+        var id_medico = document.getElementById('id_medico').value;  
+          $.ajax({
+                    url:"/post/"+id_medico,
+                    type: "GET",
+                    data: {},
+                    async: false,
+                    success: function(data){
+                    	$('#mostrar_info_perfil').fadeOut(900);
+                        $('#mostrar_info_perfil').html(data)
+                        $('#mostrar_info_perfil').fadeIn(1000);
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert(thrownError);
+                    },
+                });
+        });
+      });
+
+ $(function() {
+        $('.noticia').click(function(ev){   
+        	ev.preventDefault();
+        var id_medico = document.getElementById('id_medico').value;  
+
+          $.ajax({
+                    url:"/noticia_medico/"+id_medico,
+                    type: "GET",
+                    data: {},
+                    async: false,
+                    success: function(data){
+                    	$('#mostrar_info_perfil').fadeOut(1000);
+                        $('#mostrar_info_perfil').html(data)
+                        $('#mostrar_info_perfil').fadeIn(1000);
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert(thrownError);
+                    },
+                });
+        });
+      });
+  $(function() {
+        $('.receta').click(function(ev){   
+        	ev.preventDefault();
+        var id_medico = document.getElementById('id_medico').value;  
+
+          $.ajax({
+                    url:"/receta_medico/"+id_medico,
+                    type: "GET",
+                    data: {},
+                    async: false,
+                    success: function(data){
+                    	$('#mostrar_info_perfil').fadeOut(1000);
+                        $('#mostrar_info_perfil').html(data)
+                        $('#mostrar_info_perfil').fadeIn(1000);
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert(thrownError);
+                    },
+                });
+        });
+      });
+  $(function() {
+        $('#contactame').click(function(ev){   
+        	ev.preventDefault();
+        var id_medico = document.getElementById('id_medico').value;  
+
+          $.ajax({
+                    url:"/contactar_medico/"+id_medico,
+                    type: "GET",
+                    data: {},
+                    async: false,
+                    success: function(data){
+                    	$('#mostrar_info_perfil').fadeOut(1000);
+                        $('#mostrar_info_perfil').html(data)
+                        $('#mostrar_info_perfil').fadeIn(400);
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert(thrownError);
+                    },
+                });
+        });
+      });
+    $(function() {
+        $('#reportar').click(function(ev){   
+        	ev.preventDefault();
+        var id_medico = document.getElementById('id_medico').value;  
+
+          $.ajax({
+                    url:"/reportar_medicos/"+id_medico,
+                    type: "GET",
+                    data: {},
+                    async: false,
+                    success: function(data){
+                    	$('#mostrar_info_perfil').fadeOut(1000);
+                        $('#mostrar_info_perfil').html(data)
+                        $('#mostrar_info_perfil').fadeIn(400);
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert(thrownError);
+                    },
+                });
+        });
+      });
+        $(function() {
+        $('#editar_datos').click(function(ev){   
+            ev.preventDefault();
+            var id_medico = document.getElementById('id_medico').value;  
+
+          $.ajax({
+                    url:"/editar/consultorio/medico/"+id_medico,
+                    type: "GET",
+                    data: {},
+                    async: false,
+                    success: function(data){
+                        $('#mostrar_info_perfil').fadeOut(1000);
+                        $('#mostrar_info_perfil').html(data)
+                        $('#mostrar_info_perfil').fadeIn(400);
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert(thrownError);
+                    },
+                });
+        });
+      });
+  $(function() {
+        $('#datos_basicos').click(function(ev){   
+            ev.preventDefault();
+        var id_medico = document.getElementById('id_medico').value;  
+
+          $.ajax({
+                    url:"/editar/informacion/medico/"+id_medico,
+                    type: "GET",
+                    data: {},
+                    async: false,
+                    success: function(data){
+                        $('#mostrar_info_perfil').fadeOut(1000);
+                        $('#mostrar_info_perfil').html(data)
+                        $('#mostrar_info_perfil').fadeIn(1000);
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert(thrownError);
+                    },
+                });
+        });
+      });
+
+    $(function() {
+        $('#mis_mensajes').click(function(ev){   
+            ev.preventDefault();
+        var id_medico = document.getElementById('id_medico').value;  
+
+          $.ajax({
+                    url:"/ver/mensajes/medico/"+id_medico,
+                    type: "GET",
+                    data: {},
+                    async: false,
+                    success: function(data){
+                        $('#mostrar_info_perfil').fadeOut(1000);
+                        $('#mostrar_info_perfil').html(data)
+                        $('#mostrar_info_perfil').fadeIn(1000);
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert(thrownError);
+                    },
+                });
+        });
+      });
+</script>
+</body>
+</html>

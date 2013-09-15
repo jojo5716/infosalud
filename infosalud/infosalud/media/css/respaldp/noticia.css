@@ -1,0 +1,29 @@
+.star {
+     width:29px;
+     height: 29px;
+     background-image:url(/media/images/white-star.png);
+     float:left;
+     background-repeat: no-repeat;
+}
+
+.on {
+     background-image:url(/media/images/gold-star.png);
+}
+
+.rated > .rating {
+     background-image:url(/media/images/gold-star.png);
+}
+
+.herr{
+padding: 10px 0 0 40px;
+}
+
+.img_redes_sociales{
+     margin-right: 15px;
+}
+.herr #not_recom img{
+     width: 45px;
+     height: 45px;
+
+}
+

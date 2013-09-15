@@ -1,0 +1,189 @@
+{%extends 'guia/base.html' %}
+{%block header %}
+<meta name="keywords" content="salud, bienestar, medicina, dia, informacion, info, medicina,infosalud,infosalud.co.ve, noticias, recetas" />
+<meta name="ROBOTS" content="INDEX,FOLLOW" />
+<link rel="stylesheet" href="/media/css/editar_perfil.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart.css" type="text/css"/>
+
+
+
+<style type="text/css">
+.titulo{
+    background-color:#B6D6E2;
+    color:#3D7489;
+    font-size: 2em;
+    text-align: center;
+}
+.desc{
+    font-size: 12px;
+}
+#especialidades li{
+    float: left;
+    margin-right: 30px;
+    font-size: 25px;
+}
+#especialidades li:hover{
+    color: #80B8CE;
+}
+.medico{
+    width: 200px;
+    height: 300px;
+    border: 1px dotted;
+    text-align: center;
+    float: left;
+    margin: 0 30px 30px 0;
+    font-size: 25px;
+}
+.medico img{
+    border: 3px solid #80B8CE;
+    height: 150px;
+    margin-left: 5px;
+    width: 160px;
+}
+#nohay{
+    text-align: center;
+}
+#infoguia{
+    width: auto;
+    height: auto;
+    margin-top:60px; 
+}
+
+h1{
+    text-align: center;
+    color: #3D7489;
+}
+
+.planta{
+    float: left;
+    width: 200px;
+    height:365px;
+    border: 1px solid #E36F26;
+    text-align: center;
+    padding-bottom: 10px;
+    margin: 10px;
+    color: #3D7489;
+}
+.fondo{
+    width: 100%;
+    height: 148px;
+    background-image: url('http://thumbs.dreamstime.com/thumblarge_442/1254838020cpX8D0.jpg');
+    background-repeat: no-repeat;
+}
+.imagen{
+    position: relative;
+    top: 0px;
+    border: 1px solid;
+}
+.planta img{
+    position: relative;
+    border-radius: 90px;
+    border: 2px solid;
+    width: 120px;
+    height: 120px;
+    position: relative;
+    top: -48px;
+    left: 0;
+}
+.nombre{
+    margin-bottom: 10px;
+    font-size: 32px;
+}
+.link{
+    position: relative;
+}
+#barra{
+    float: right;
+    width: 300px;
+    border: 1px solid;
+    height: 800px;
+    padding: 10px;
+    border-radius: 7px;
+}
+#barra a{
+    border: 1px solid;
+    padding: 10px;
+
+}
+#barra li{
+display:block;
+  float:left;
+  margin:20px 1px 1px;
+}
+#barra a:hover{
+    background-color: #F2F2F2;
+}
+.triangle-r{
+    left: 311px;
+}
+.triangle-l{
+    left: -41px;
+}
+.rectangle{
+    width: 352px;
+    left: -26px;
+}
+.anaranjado{
+    color: #E36F26;
+    font-weight: bold;
+}
+</style>
+{%endblock%}
+{% block title%}Plantas para la {{seccion}} {%endblock%}
+
+
+{%block content%}
+
+   <div id="infoguia">
+    <h1>Revisa nuestra gran variedad de plantas y sus propiedades para: <span class="anaranjado">{{seccion}}.</span></h1>
+    <div id="barra">
+<div class="rectangle"><h2>Filtrado de datos</h2></div>
+<div class="triangle-l"></div>
+<div class="triangle-r"></div>
+<p>Encuentra una planta con propiedades curativas por sus categorias.</p>
+<ul>
+{%for x in tags%}
+    <li><a href="/plantas/seccion/{{x.id}}">{{x}}</a></li>
+{%endfor%}
+</ul>
+</div>
+<div id="plantas_all" >
+    {%for x in plantas%}
+    <a href="/planta/{{x.id}}">
+    <div class="planta">
+        <div class="fondo"></div>
+            <img src='/media/{{x.Imagen}}' />
+            <div class="nombre">{{x.nombre}}</div>
+       
+    </div>
+</a>
+</div>
+    {%endfor%}
+    
+
+
+   </div>
+{%endblock%}
+
+{% block paginator %}
+    {% if plantas %}
+    <span class="step-links" style="width:900px; display:block; margin:35px; text-align:left;text-align:center;">
+    <a href="/plantas/curativas/1/"> << </a>
+
+            {% if plantas.has_previous %}
+                <a href="/plantas/curativas/{{ plantas.previous_page_number }}/">Primero </a>
+            {% else %}
+                <b>Anterior </b>
+            {% endif %}
+            <span class="current">
+            Página {{ plantas.number }} de {{ plantas.paginator.num_pages }}
+        </span>
+            {% if plantas.has_next %}
+                <a href="/plantas/curativas/{{ plantas.next_page_number }}/"> > </a>
+            {% else %}
+                <b>Siguiente</b>
+            {% endif %}
+            <a href="/plantas/curativas/{{ plantas.paginator.num_pages }}/"> >> </a>
+    </span>
+    {% endif %}
+{% endblock %}

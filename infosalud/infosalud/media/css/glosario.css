@@ -1,0 +1,47 @@
+#glosario_page{
+  	color: #80B8CE;
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 70px;
+}
+
+#header_glosario{
+    width: auto;
+    height: 200px;
+    margin-bottom: 10px;
+}
+#header_glosario img{
+    float: left;
+    width: 200px;
+    height: 200px;
+}
+
+#header_glosario p{
+    float: right;
+    width: 600px;
+    color: #80B8CE;
+
+}
+
+#seccion_glosario{
+   background-color: #F5F5F5;
+    border: 1px solid #E3E3E3;
+    border-radius: 4px 4px 4px 4px;
+    float: right;
+    margin-bottom: 30px;
+    width: 285px;
+    color: #77C01D;
+}
+#seccion_glosario a{
+    color: #3D7489;
+}
+a:visited{
+    color: #3D7489;
+}
+#seccion_glosario a:hover{
+    color: #E36F26;
+}
+#activo{
+    color: #E36F26;
+}

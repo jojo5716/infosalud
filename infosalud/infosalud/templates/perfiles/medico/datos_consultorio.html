@@ -1,0 +1,182 @@
+
+<style type="text/css">
+p{
+	color: #3D7489;
+}
+.azul_claro{
+	color:#3D7489;
+}
+.anaranjado{
+	color: #E36F26;
+}
+.titulo{
+    background-color:#B6D6E2;
+    color:#3D7489;
+    font-size: 2em;
+    text-align: center;
+}
+#editar_basica{
+	width: 100%;
+	height: 500px;
+}
+#imagen{
+	float: left;
+	width: 20%;
+	height: 200px;
+	text-align: center;
+}
+#imagen img{
+	border-radius: 7px;
+	border: 5px solid;
+}
+#formulario{
+	width: 100%;
+	text-align: center;
+
+}
+#formulario input{
+	width: 50%;
+}
+#formulario textarea{
+	width: 50%;
+}
+#formulario label{
+	font-size: 15px;
+}
+.burbuja{
+	width: 80%;
+	height: 100px;
+	border: 1px solid;
+	margin-left: 10%;
+	margin-bottom: 10px;
+}
+.burbuja p{
+	text-align: center;
+	font-size: 25px;
+	margin-top: 20px;
+}
+.burbuja span{
+	position: relative;
+	float: right;
+	right: 2%;
+	top: -11px;
+	font-weight: bold;
+	color: #CC3333;
+}
+.coma{
+	color: #CC3333;
+    font-size: 45px;
+}
+.publico{
+	font-size: 25px;
+}
+input[type=checkbox] {display: none;}
+input[type="checkbox"] + label { 
+	background: #fff; 
+	display: inline-block; 
+	width: 82px; 
+	height: 24px; 
+	background: url('/media/images/check_01.png') 0px 0px no-repeat; 
+	text-indent: -1000em; 
+}
+
+input[type="checkbox"]:checked + label{ background: url('/media/images/check_01.png') 0px -24px no-repeat;}
+</style>
+
+
+<section class="alert">
+	<div class="green">	
+		<p>Recuerda que <span class="anaranjado">TODOS</span> los datos de tu trabajo tienen la opcion de ocultar al publico. Si no quieres mostrar alguna informacion solo debes marcar la casilla <span class="anaranjado">"Ocultar"</span> y guardar los cambios.</p>
+	</div>
+</section>
+
+	<div id="editar_basica">
+			
+		<div id="formulario">
+			<fieldset id="field">
+			<form action="/editar/consultorio/medico/{{id_medico}}" method="POST" id="form_perfil">
+				{%csrf_token%}
+				{%if form.errors%}
+				<p>Hubo problemas en algunos campos, por favor revize cada campo y corriga los errores.</p>
+				{%endif%}
+				<h1 class="titulo">Direccion de consultorio</h1>
+				{%if form.direccion.errors%}
+					<p>Hubo un problema con este campo, por favor no utilice simbolos.</p>
+				{%endif%}
+				{%if direccion%}
+				<p>¿Te has mudado de consultorio? Actualiza tu direccion aqui</p>
+					<p>Tu direccion actual es <span class="anaranjado">{{direccion}}</span>. Puedes cambiarla si deseas.</p>
+				{%else%}
+				<p>Agrega la direccion de tu consultorio para que tus pacientes puedan llegar facilmente. Recuerda que puedes decidir no mostrar tu direccion.</p>
+				{%endif%}
+					{{form.direccion}}
+					<br/>
+				<span class="publico">Marca esta casilla para hacer tu direccion publica a todos los usuarios.</span> 
+				<div class="check">
+				{{form.direccion_act}}<label for="id_direccion_act">
+				</div>
+				<h1 class="titulo">Horario de atencion</h1>
+				<p>Especifica que dia y a que hora puedes atender a las personas.</p>
+				<p>Este es tu horario actual.</p>
+				
+					
+					{%for x in hor%}
+							<a href="" class="burbuja">
+								{{x}}
+							</a>
+					{%endfor%}
+				<p class="anaranjado">Aqui podras crear un nuevo horario.</p>
+				<p>Para crear un horario entendible por todos los usuarios debes seguir el formato que te recomienda InfoSalud. Usa una coma para separar los diferentes <span class="anaranjado">horarios</span> y utiliza este formato de ejemplo: <br/> <span class="anaranjado">Lun-Vie 06:00am - 12:00pm / 02:00pm - 06:00pm <span class="coma">,</span> Sab-Dom 10:00 am - 12:00pm</span></p>
+					{{form.horarios}}<br/>
+				<span class="publico">Marca esta casilla para hacer tu horario publico a todos los usuarios.</span> 
+				<div class="check">
+				{{form.horarios_act}}<label for="id_horarios_act">
+				</div>
+
+				<h1 class="titulo">Telefono</h1>
+				{%if form.telefono.errors%}
+					<p>Por favor revice este campo, no utilice letras o simbolos.</p>
+				{%endif%}
+				<p>Puedes agregar un telefono de consultorio o donde los pacientes puedan llamar y pedir alguna informacion</p>
+				{%if tlf%}
+				<p>Tu telefono actual es <span class="anaranjado">{{tlf}}</span>. Puedes cambiarlo si deseas.</p>
+				{%endif%}
+					{{form.telefono}}
+				<br/>
+				<span class="publico">Marca esta casilla para hacer tu telefono publico a todos los usuarios.</span> 
+				<div class="check">
+				{{form.telefono_act}}<label for="id_telefono_act">
+				</div>
+
+				<h1 class="titulo">Seleccione una lista de precios</h1>
+				<p>Puedes crear una lista de precios para que tus pacientes tengan una idea antes de ir a la cita previa.</p>
+				<p>Para crear una lista de precios entendible por todos los usuarios debes seguir el formato que te recomienda InfoSalud. Usa una coma para separar los diferentes <span class="anaranjado">precios</span> y utiliza este formato de ejemplo: <br/> <span class="anaranjado">Primer consulta: XX Bsf. <span class="coma">,</span> Chequeo general: YY Bsf.</span></p>
+				{{form.precios}}
+				<br/>
+				<span class="publico">Marca esta casilla para hacer tu lista de precios publico a todos los usuarios.</span> 
+				<div class="check">
+				{{form.precios_act}}<label for="id_precios_act">
+				</div>
+				<h1 class="titulo">Guardar datos</h1>
+				<input type="submit" value="Guardar"/>
+			</form>
+		</div>
+		</fieldset>
+
+</div>
+	
+<script type="text/javascript">
+ $('#form_perfil').submit(function(ev) { // catch the form's submit event
+            ev.preventDefault();
+            $.ajax({ // create an AJAX call...
+                data: $(this).serialize(), // get the form data
+                type: $(this).attr('method'), // GET or POST
+                url: $(this).attr('action'), // the file to call
+                success: function(response) { // on success..
+                    $('#mostrar_info_perfil').html(response);
+                }
+            });
+            return false;
+        });
+
+</script>

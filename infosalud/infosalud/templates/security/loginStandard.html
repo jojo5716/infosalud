@@ -1,0 +1,94 @@
+{%extends 'noticia/base.html' %}
+{% block title%} Registrate {%endblock%}
+{%block header %}
+
+<link rel="stylesheet" href="/media/css/kickstart-forms.css" type="text/css"/>
+
+<style type="text/css">
+.titulos{
+    background-color:#B6D6E2;
+    color:#3D7489;
+    font-size: 2em;
+    text-align: center;
+}
+form p{
+	text-align: center;
+	margin: 10px 0 20px 0;
+}
+form p:hover{
+	background-color: #F2F2F2;
+}
+#noticia h1{
+	color: #3D7489;
+  	font-weight: bold;
+  	text-align: center;
+  	margin-bottom: 20px;
+}
+#noticia span{
+	color: #E36F26;
+	font-weight: bold;
+}
+input[type=checkbox] {display: none;}
+input[type="checkbox"] + label { 
+    background: #fff; 
+    display: inline-block; 
+    width: 82px; 
+    height: 24px; 
+    background: url('/media/images/check_01.png') 0px 0px no-repeat; 
+    text-indent: -1000em; 
+}
+
+input[type="checkbox"]:checked + label{ background: url('/media/images/check_01.png') 0px -24px no-repeat;}
+</style>
+{%endblock%}
+{%block content%}
+ 
+        <div id="noticia" style="width:600px; height:auto; margin-top:55px; ">
+        {%if user.is_authenticated%}
+            <h1>Usted ya esta registrado!</h1>
+        {%else%}
+             <br><br>
+             <h1>Registrate <span>GRATIS</span> en InfoSalud y descubre un mundo de novedades para tu salud diaria.</h1>
+             <form action="." method="POST">
+                 {%  csrf_token %}
+                 <div class="titulos">Nombre de usuario</div>
+                 {%if register_form.username.errors%}
+                    <p>Hay un error en el nombre de usuario, es posible que ya exista. Por favor utilice otro.</p>
+                {%endif%}
+                    <p>{{ register_form.username }}</p>
+
+                 <div class="titulos">Selecciona tu sexo</div>
+                    <p>{{ register_form.gender }}</p>
+               
+                 <div class="titulos">Email</div>
+                {%if register_form.email.errors%}
+                    <p>Este email ya existe</p>
+                {%endif%}
+                    <p>{{ register_form.email }}</p>
+
+                 <div class="titulos">Escribe una contraseña</div>
+                    <p>{{ register_form.password }}</p>
+
+                <div class="titulos">Repite nuevamente tu contraseña</div>
+                    <p>{{ register_form.password1 }}</p>
+                <div class="titulos">Suscribete a nuestro Newsletter</div>
+                    <p>Deja activada esta casilla para mantenerte informado de nuevas actualizaciones en InfoSalud. Tanto como Noticias, Recetas, Plantas medicinales, Centros de salud y mucho herramientes para mantenerte Zahahoria.</p>
+
+                    <div class="check" style=" text-align: center;">
+                {{ register_form.newsletter }}<label for="id_newsletter">
+                </div>
+                {{ register_form.newsletter }}
+                <div class="titulos">Registrarse</div>
+                    <p><input type="submit" class="green" value="registrar"></p>
+             </form>
+             {%endif%}
+            </div>
+    
+{%endblock%}
+{% block apps %}
+    <a href="https://www.facebook.com/infsalud"><div class="app" ><img src="/media/images/facebook_g.png" /></div></a>
+    <a href="https://twitter.com/inf_salud"><div class="app" ><img src="/media/images/twitter_g.png" /></div></a>
+    <a href="http://www.youtube.com/user/infosaludvzla"><div class="app" ><img src="/media/images/youtube_g.png" /></div></a>
+    <a href="http://www.linkedin.com/company/info_salud"><div class="app" ><img src="/media/images/linkedin_g.png" /></div></a>
+{% endblock %}
+

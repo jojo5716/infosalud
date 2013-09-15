@@ -1,0 +1,55 @@
+.mensaje_completo{
+	width: auto;
+	height: 50px;
+	border: 1px solid #77C01D;
+	margin: 10px;
+	color: #3D7489;
+}
+.mensaje_completo:hover{
+	background-color: #F2F2F2;
+}
+.contenido_mensaje{
+float: left;
+width: 270px;
+}
+.titulo_mensaje{
+	width: 230px;
+	float: left;
+}
+.fecha_mensaje{
+	float: left;
+	margin-right: 20px;
+}
+
+.status_mensaje{
+	float: right;
+	margin-right: 20px;
+	color: #E36F26;
+}
+
+#imagen_emisor{
+	float: left;
+	width: 150px;
+	height: 150px;
+	border: 1px solid;
+	margin-right: 30px;
+}
+#nombre_autor{
+	font-size: 20px;
+}
+#leer_contenido{
+	float: left;
+	width: 580px;
+}
+#titulo_mensaje{
+	font-size: 25px;
+}
+#contenido_mensaje{
+	font-size: 30px;
+	margin-bottom: 30px;
+}
+#imagen_emisor img{
+	width: 150px;
+	height: 150px;
+}
+

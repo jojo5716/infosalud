@@ -1,0 +1,123 @@
+{%extends 'noticia/base.html' %}
+{% block title%} Registrate como medico {%endblock%}
+{%block header %}
+
+<link rel="stylesheet" href="/media/css/kickstart-forms.css" type="text/css"/>
+
+<style type="text/css">
+.titulos{
+    background-color:#B6D6E2;
+    color:#3D7489;
+    font-size: 2em;
+    text-align: center;
+}
+form p{
+	text-align: center;
+	margin: 10px 0 20px 0;
+}
+form p:hover{
+	background-color: #F2F2F2;
+}
+#noticia h1{
+	color: #3D7489;
+  	font-weight: bold;
+  	text-align: center;
+  	margin-bottom: 20px;
+}
+#noticia span{
+	color: #E36F26;
+	font-weight: bold;
+}
+</style>
+{%endblock%}
+{%block content%}
+
+		 	<div id="noticia" style="width:600px; height:auto; margin-top:55px; ">
+        {%if user.is_authenticated%}
+            <h1>Usted ya esta registrado!</h1>
+        {%else%}
+             <br><br>
+             <h1>Registrate <span>GRATIS</span> en InfoSalud y descubre un mundo de novedades para tu salud diaria.</h1>
+             <form action="." method="POST">
+                 {%  csrf_token %}
+                {%if registerf.errors%}
+                    <p>Hay errores en los datos.</p>
+                {%endif%}
+
+                 <div class="titulos">Nombre de usuario</div>
+                {%if registerf.username.errors%}
+                    <p>Error en el nombre de usuario, es posible que ya exista, pruebe con otro.</p>
+                {%endif%}
+                 	<p>{{ registerf.username }}</p>
+
+                 <div class="titulos">Nombre</div>
+                {%if registerf.nombre.errors%}
+                    <p>Error en el nombre, no utilice simbolos especiales.</p>
+                {%endif%}
+                 	<p>{{ registerf.nombre }}</p>
+
+                 <div class="titulos">Apellidos</div>
+                {%if registerf.apellido.errors%}
+                    <p>Error en el apellido, no utilice simbolos especiales.</p>
+                {%endif%}
+                    <p>{{ registerf.apellido }}</p>
+
+                 <div class="titulos">Cedula de identidad</div>
+                {%if registerf.cedula.errors%}
+                    <p>Error en la cedula de identidad, no utilice simbolos especiales.</p>
+                {%endif%}
+                 	<p>{{ registerf.cedula }}</p>
+
+                <div class="titulos">Email</div>
+                {%if registerf.email.errors%}
+                    <p>Error en el email, es posible que ya exista por favor utilice otro.</p>
+                {%endif%}
+                    <p>{{ registerf.email }}</p>
+
+                <div class="titulos">Escribe tu especialidad</div>
+                 	<p>{{ registerf.especialidad }}</p>
+
+
+                <div class="titulos">Universidad donde te graduaste</div>
+                {%if registerf.universidad.errors%}
+                    <p>Error en el nombre de universidad, no utilice simbolos especiales.</p>
+                {%endif%}
+                    <p>{{ registerf.universidad }}</p>
+
+                <div class="titulos">Fecha cuando te graduaste</div>
+                {%if registerf.graduacion.errors%}
+                    <p>Error la fecha de graduacion, no utilice simbolos especiales.</p>
+                {%endif%}
+                    <p>{{ registerf.graduacion }}</p>
+
+                <div class="titulos">Escribe tu codigo de medico</div>
+                {%if registerf.numLicence.errors%}
+                    <p>Error en el numero de licencia medico, no utilice simbolos especiales.</p>
+                {%endif%}
+                    <p>{{ registerf.numLicence }}</p>
+
+                <div class="titulos">Escribe tu sexo</div>
+                    <p>{{ registerf.gender }}</p>
+
+                <div class="titulos">Escribe tu contrasena</div>
+                {%if registerf.password.errors%}
+                    <p>Error en la clave de acceso, deben coincidin las claves.</p>
+                {%endif%}
+                    <p>{{ registerf.password }}</p>
+                <div class="titulos">Escribe nuevamente tu contrasena</div>
+                    <p>{{ registerf.password1 }}</p>
+
+                <div class="titulos">Registrarse</div>
+                 	<p><input type="submit" class="green" value="registrar"></p>
+             </form>
+          {%endif%}
+		 	</div>
+{%endblock%}
+{% block apps %}
+
+    <a href="https://www.facebook.com/infsalud"><div class="app" ><img src="/media/images/facebook_g.png" /></div></a>
+    <a href="https://twitter.com/inf_salud"><div class="app" ><img src="/media/images/twitter_g.png" /></div></a>
+    <a href="http://www.youtube.com/user/infosaludvzla"><div class="app" ><img src="/media/images/youtube_g.png" /></div></a>
+    <a href="http://www.linkedin.com/company/info_salud"><div class="app" ><img src="/media/images/linkedin_g.png" /></div></a>
+{% endblock %}
+

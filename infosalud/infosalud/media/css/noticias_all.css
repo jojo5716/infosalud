@@ -1,0 +1,86 @@
+.noticias_all{
+	margin: 65px 0 0 0;
+}
+
+#noticia_completa{
+
+    width: 585px;
+    height: 164px;
+    border: 10px solid #80B8CE;
+    margin: 10px 0 10px 0;
+    border-radius: 3px;
+    background-image: url("/media/images/infosalud.png");
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: 135px auto;
+
+}
+
+
+
+#receta_completa{
+
+    width: 585px;
+    height: 340px;
+    border: 1px solid #80B8CE;
+    margin: 10px 0 10px 0;
+    border-radius: 3px;
+
+}
+#titulo_receta{
+    float: right;
+    width: 280px;
+    text-align: center;
+    color: #E36F26;
+    font-weight:  bold;
+    margin-bottom: 20px;
+}
+#receta_completa img{
+    float: left;
+    width: 300px;
+    height: 320px;
+    margin: 5px 0 0 5px;
+}
+
+#ingredientes_receta {
+    float: right; 
+    width: 280px; 
+    height: 250px;
+    overflow-y:scroll;
+}
+
+#otros_datos{
+    width:300px; 
+    height:100px; 
+    text-align:center; 
+    color: #80B8CE;
+    font-weight: bold;
+}
+
+#categoria_receta{
+    width:282px; 
+    float:right; 
+    text-align:center;
+    font-weight: bold;
+    color:#80B8CE;
+}
+.cont_noti{
+    width:400px; float:left; position:relative; top:10px; margin-bottom:30px;  color:#E36F26;margin-left: 10px;font-size: 20px;
+}
+.imagen_noti{
+    float:left; width:110px; height:110px;left: 3px;
+}
+.recomienda_noti{
+    color:#3D7489; float:right; font-weight:bold; text-align:center; width:440px;
+}
+.ver_noti_boton{
+     margin-top: 92px; text-align: center;color:#3D7489;
+     font-weight: bold;
+
+}
+#titulo_orden_noti{
+    background-color: #B6D6E2;
+    color: #3D7489;
+    text-align: center;
+    width: 585px;
+}

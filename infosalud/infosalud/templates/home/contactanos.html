@@ -1,0 +1,45 @@
+{%extends 'home/base.html'%}
+{%block title%} Contactanos {%endblock%}
+{%block titulo_pagina%}Formulario de contacto{%endblock%}
+{%block content%}
+{% if info_enviado %}
+<div id="contactanos">
+<div style="height:auto; margin-bottom:50px;">
+<p style="font-size: 29px; margin-bottom: 41px;">
+	Gracias por enviar un comentario, nos pondremos en contacto contigo.
+</p>
+	<p style="">La informacion recibida fue de la siguiente direccion:</p> <br>
+	<p></p><p style="">Email utilizado:<span style="color:#E36F26;"> prueba@gmail.com</span></p>
+	<p style="margin-bottom: 35px;">Titulo: <span style="color:#E36F26;">Holaaa</span></p>
+<span style="font-size: 30px; color: rgb(128, 184, 206);">Te recomendamos que heches un vistazo a la seccion de <span style="color: rgb(61, 116, 137); font-weight: bold;">recetas!</span> Te aseguramos que encontraras muchas <span style="color: rgb(61, 116, 137); font-weight: bold;">deliciosas</span> y <span ;="" style="color: rgb(61, 116, 137); font-weight: bold;">faciles</span> de cocinar.</span>
+</div>
+{%for rec in recetas%}
+<div style="border: 1px solid; display: block; float: left; width: 200px; height: 200px; margin: 0px 130px 0px 10px;" class="noti_contactanos"><img src="../media/noticias/{{rec.imagen}}" alt="rec.titulo"/></div>
+{%endfor%}
+
+</div>
+{%else%}
+<div id="contactanos">
+	<h1>Contactanos</h1>
+	<h3>Si tienes alguna pregunta, sugerencia o comentario podras enviarnoslo mediante el siguiente formulario y te responderemos lo mas pronto posible.</h3>
+	<h2 style="color: rgb(227, 111, 38); margin-bottom: 20px;">Recuerda que en InfoSalud estamos para servirte.</h2>
+		<form action="." method="POST" style="text-align:center;">
+		{% csrf_token %}
+		{{form_contacto.as_p}}
+		<p><input type="submit" value="Enviar" class="blue" /></p>
+	</form>
+</div>
+	
+{%endif %}
+{%endblock%}
+
+{%block apps%}
+<div class="rectangle"><h2>Otros medios</h2></div>
+<div class="triangle-l"></div>
+<div class="triangle-r"></div>
+	<a href="https://www.facebook.com/infsalud"><div class="app" ><img src="/media/images/facebook_g.png" /></div></a>
+	<a href="https://twitter.com/inf_salud"><div class="app" ><img src="/media/images/twitter_g.png" /></div></a>
+	<a href="http://www.youtube.com/user/infosaludvzla"><div class="app" ><img src="/media/images/youtube_g.png" /></div></a>
+	<a href="http://www.linkedin.com/company/info_salud"><div class="app" ><img src="/media/images/linkedin_g.png" /></div></a>
+
+{%endblock%}

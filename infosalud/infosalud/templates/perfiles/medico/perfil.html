@@ -1,0 +1,126 @@
+{%extends 'perfiles/medico/base.html' %}
+{%block header %}
+<meta name="keywords" content="salud, bienestar, medicina, dia, informacion, info, medicina,infosalud,infosalud.co.ve, noticias, recetas" />
+<meta name="ROBOTS" content="INDEX,FOLLOW" />
+<script type="text/javascript" src="../media/js/editar_formulario.js"></script>
+
+
+<link rel="stylesheet" href="/media/css/editar_perfil.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart-buttons.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart-forms.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart-menus.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/perfil_usuario.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/ventana_modal.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/prettify.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/mensajes_medicos.css" type="text/css"/>
+
+<style type="text/css">
+   #container{background:#ebebeb;}
+ 
+.switch{
+    border:none;
+    background:left no-repeat;
+    width:105px;
+    height:46px;
+    padding:0;
+    margin:0;
+}
+ 
+.on, .off{
+    width:50px;
+    height:40px;
+    display:inline-block;
+    cursor:pointer;
+}
+ 
+.result{display:none;}
+#id_post{
+    width: 420px;
+    height: 45px;
+    margin-top: 20px;
+}
+.horario{
+  color: #E36F26;
+  font-weight: bold;
+}
+p{
+    color: #E36F26;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+p:hover{
+  background-color: #F2F2F2;
+}
+</style>
+{%endblock%}
+{% block title%}Perfil Medico {%endblock%}
+
+{%block titulo_pagina%}Perfil Medico InfoSalud{%endblock%}
+
+{%block content%}
+
+<div class="row-fluid">
+{%if hor_act%}
+    <h1 class="horario_titulo">Horario de atencion</h1>
+      {%for y in hor%}
+     <p> <img src="/media/images/hora.png" style="margin-right:20px;"/> {{y}}</p>
+     <hr class="alt2" style="margin:0; clear:none;"/>
+      {%endfor%}
+{%endif%}
+{%if direc_act%}
+    <h1 class="horario_titulo">Direccion de consultorio</h1>
+    <p>{{direccion}}</p>
+{%endif%}
+{%if tlf_act%}
+    <h1 class="horario_titulo">Telefono de consultorio</h1>
+    <p><img src="/media/images/tlf.png" height="30" width="30" style="position:relative; top:7px; margin-right:20px;"/> {{tlf}}</p>
+{%endif%}
+{%if prec_act%}
+    <h1 class="horario_titulo">Precios</h1>
+      {%for z in prec%}
+      <p>{{z}}</p>
+      <hr class="alt2" style="margin:0;clear:none;"/>
+      {%endfor%}
+{%endif%}
+
+{%if not hor_act and not direc_act and not prec_act and not tlf_act%}
+{%if yo%}
+<div style='margin-top:37px;color:#3D7489;'><div style='font-size:37px;'>No tienes ningun dato para mostras. Recuerda que puedes configurar y hacer visible cualquiera de las siguientes opciones: <span class="horario">Horario de trabajo</span>, <span class="horario">Direccion de consultorio</span>, <span class="horario">Telefono de oficina</span>, y <span class="horario">mucho mas!</span> Con tan solo ingresar en nuestro <span class="horario">panel de gestion de contenido</span> haciendo <span style="color:#77C01D;font-weight:bold;">CLICK AQUI</span>  </div></div>
+{%else%}
+<div style='margin-top:37px;color:#3D7489;'><div style='font-size:37px;'>El usuario que estas visitando no ha decidido hacer visible su informacion.<span style="color:#77C01D;font-weight:bold;">¿Quieres enviarle un mensaje privado?</span> </div></div>
+{%endif%}
+{%endif%}
+
+</div>
+
+{%endblock%}
+
+{%block ventana_modal_script%}
+<script type="text/javascript">
+$(document).ready(function(){
+ 
+    $('.switch').css('background', 'url("../media/images/switch.png")');
+    $('.on_off').css('display','none');
+    $('.on, .off').css('text-indent','-10000px');
+ 
+    $("input[name=on_off]").change(function() {
+      var button = $(this).val();
+       
+        if(button == 'off'){ $('.switch').css('background-position', 'right'); }
+        if(button == 'on'){ $('.switch').css('background-position', 'left'); }  
+               
+         $('.result span').html(button);
+         $('.result').fadeIn();
+ 
+   });
+ 
+});
+
+
+
+$('.toggle-button-class').toggleButtons();
+</script>
+
+{%endblock%}

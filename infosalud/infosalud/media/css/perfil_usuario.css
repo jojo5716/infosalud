@@ -1,0 +1,95 @@
+#header_perfil{
+	width: auto;
+	height: 300px;
+	margin-top: 80px;
+}
+#imagen_perfil{
+	float: left;
+}
+#header_perfil img{
+	width: 300px;
+	height: 300px;
+	border: 9px solid #80B8CE;
+	border-radius: 5px;
+}
+#header_perfil img:hover{
+	border: 9px solid #3D7489;
+}
+#header_perfil h1{
+    color: #3D7489;
+    float: left;
+    font-size: 57px;
+    margin: 25px 0 0 20px;
+    position: relative;
+    text-align: center;
+    top: -40px;
+    width: 650px;
+}
+#header_perfil h2{
+    color: #3D7489;
+    float: left;
+    font-size: 45px;
+    margin: 0 0 0 20px;
+    position: relative;
+    text-align: center;
+    top: -40px;
+    width: 650px;
+}
+#app_perfil{
+	width: auto; height: 99px; float: left; margin-left: 20px;
+	position: relative;
+	top: -15px;
+	text-align: center;
+	color: #E36F26;
+	font-weight: bold;
+}
+#app_perfil .numero{
+	font-size: 34px; display: block;
+}
+#app_perfil .nombre{
+	font-size: 20px;
+}
+#app_perfil ul li{
+	display: block;
+	float: left;
+	margin-left: 70px;
+}
+#app_perfil #app_medio{
+	margin-left: 100px;
+}
+#app_perfil #app_final{
+	margin-left: 100px;
+}
+#menu_perfil{
+	float: right;
+	border: 1px  dotted;
+	width: 200px;
+	height: auto;
+	text-align: center;
+}
+#menu_perfil a{
+	color: #3D7489;
+}
+
+
+.contenedor_menu_perfil{
+	height: 46px;
+    padding-top: 21px;
+}
+.contenedor_menu_perfil:hover{
+	background-color: #F2F2F2;
+	color:#E36F26;
+}
+
+#mostrar_info_perfil{
+	width: 780px;
+	height:auto; 
+	text-align: center;
+	color: #E36F26;
+}
+
+/*MOSTRAR INFORMACION SOBRE HORARIOS,DIRECCION,PRECIOS*/
+.horario_titulo{
+	color: #3D7489;
+	background-color: #B6D6E2;
+}

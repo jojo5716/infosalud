@@ -1,0 +1,138 @@
+
+<style type="text/css">
+.titulo{
+    background-color:#B6D6E2;
+    color:#3D7489;
+    font-size: 2em;
+    text-align: center;
+}
+#editar_basica{
+	width: 100%;
+	height: 500px;
+}
+#imagen{
+	float: left;
+	width: 20%;
+	height: 200px;
+	text-align: center;
+}
+#imagen img{
+	border-radius: 7px;
+	border: 5px solid;
+}
+#formulario{
+	width: 100%;
+	text-align: center;
+
+}
+#formulario input{
+	width: 50%;
+}
+#formulario textarea{
+	width: 50%;
+}
+#formulario label{
+	font-size: 15px;
+}
+.burbuja{
+	width: 80%;
+	height: 100px;
+	border: 1px solid;
+	margin-left: 10%;
+	margin-bottom: 10px;
+}
+.burbuja p{
+	text-align: center;
+	font-size: 25px;
+	margin-top: 20px;
+}
+.burbuja span{
+	position: relative;
+	float: right;
+	right: 2%;
+	top: -11px;
+	font-weight: bold;
+	color: #CC3333;
+}
+td{
+	border: 1px solid;
+	padding: 13px;
+}
+table{
+	margin-bottom: 30px;
+}
+</style>
+
+
+<section class="alert">
+	<div class="green">	
+		<p>Recuerda que <span class="anaranjado">TODOS</span> los datos de tu trabajo tienen la opcion de ocultar al publico. Si no quieres mostrar alguna informacion solo debes marcar la casilla <span class="anaranjado">"Ocultar"</span> y guardar los cambios.</p>
+	</div>
+</section>
+
+	<div id="editar_basica">
+			
+		<div id="formulario">
+			<fieldset id="field">
+			<form action="." method="POST">
+				{%csrf_token%}
+				<h1 class="titulo">Direccion de consultorio</h1>
+				<p>¿Te has mudado de consultorio? Actualiza tu direccion aqui</p>
+				{%if direccion%}
+					<p>Tu direccion actual es <span class="anaranjado">{{direccion}}</span>. Puedes cambiarla si deseas.</p>
+				{%endif%}
+					{{form.direccion}}
+			
+				<h1 class="titulo">Horario de atencion</h1>
+				<p>Especifica que dia y a que hora puedes atender a las personas.</p>
+				{%if hor%}
+					<p class="anaranjado">Ya tienes agregado un horario, puedes agregar mas o eliminar alguno.</p>
+					<p>Si quieres modificarlo deberas eliminarlo en la "X" y volver a crearlo.</p>
+					{%for x in hor%}
+					<a href="" class="burbuja">
+							{{x}}
+							
+					</a>
+					{%endfor%}
+				{%endif%}
+				<p class="anaranjado">Aqui podras crear un nuevo horario.</p>
+
+					<table>
+						<tr>
+							<td>Empieza a trabajar</td>
+							<td>Termina de trabajar</td>
+							<td>Hora de comienzo en la mañana</td>
+							<td>Hora de salida en la mañana</td>
+							<td>Hora de comienzo tarde</td>
+							<td>Hora que termina en la tarde</td>
+							<td>Agregar nuevo horario</td>
+
+						</tr>
+						<tr>
+							<td>{{form.dia1}}</td>
+							<td>{{form.dia2}}</td>
+							<td>{{form.hora_m_comienzo}}</td>
+							<td>{{form.hora_m_termina}}</td>
+							<td>{{form.hora_t_comienzo}}</td>
+							<td>{{form.hora_t_termina}}</td>
+							<td>+</td>
+						</tr>
+
+					</table>
+				<h1 class="titulo">Telefono</h1>
+				<p>Puedes agregar un telefono de consultorio o donde los pacientes puedan llamar y pedir alguna informacion</p>
+				{%if tlf%}
+				<p>Tu telefono actual es <span class="anaranjado">{{tlf}}</span>. Puedes cambiarlo si deseas.</p>
+				{%endif%}
+					{{form.telefono}}
+				<h1 class="titulo">Seleccione un horario</h1>
+				<p>Agrega el horario en la cual puedas atender a tus pacientes</p>
+				
+				<input type="submit" value="Actualizar"/>
+			</form>
+		</div>
+						</fieldset>
+
+</div>
+	
+

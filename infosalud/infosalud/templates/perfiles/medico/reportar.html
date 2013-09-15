@@ -1,0 +1,50 @@
+{%if info_enviado%}
+<div style='margin-top:37px;color:#77C01D;' ><div style='font-size:20px;'>Gracias por contar con nosotros! <br/> Tu mensaje ha sido creado con exito.</div></div>
+{%else%}
+<form action="/reportar_medicos/{{id_medico}}" autocomplete="on" method="POST" id="form_reportar">
+	{%  csrf_token %}
+	<fieldset id="field">
+        <input type="hidden" value="{{id_medico}}" id="id_medico" />
+    <h1 class="titulos">Denunciar medico</h1>
+        <h5>Escribe un motivo por la cual estas denunciando este medico.</h5>
+		{{form.mensaje}}
+    <h1 class="titulos">Denunciar medico</h1>
+		<input type="submit" class="red" value="Denunciar"/>
+	</fieldset>
+</form>
+{%endif%}
+
+<style type="text/css">
+.titulos{
+    background-color:#CC3333;
+    color:#fff;
+    font-size: 2em;
+    text-align: center;
+}
+.comas{
+    color: #CC3333;
+    font-size: 45px;
+}
+#id_titulo{
+    width: 300px;
+}
+h5{
+    color: #CC3333;
+}
+</style>
+
+<script type="text/javascript">
+        $('#form_reportar').submit(function(ev) { // catch the form's submit event
+            ev.preventDefault();
+            $.ajax({ // create an AJAX call...
+                data: $(this).serialize(), // get the form data
+                type: $(this).attr('method'), // GET or POST
+                url: $(this).attr('action'), // the file to call
+                success: function(response) { // on success..
+                    $('#mostrar_info_perfil').html("<div style='margin-top:37px;color:#77C01D;' ><div style='font-size:20px;'>Felicidades! <br/Tu denuncia ha sido enviada, gracias por contar con InfoSalud.</div></div>");
+                }
+            });
+            return false;
+        });
+
+</script>

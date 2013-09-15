@@ -1,0 +1,127 @@
+    <!-- {%if yo%}
+<a href="/panel/{{dato_user.id}}"><div style="width:auto; height:200px; border:1px solid;"><iframe width="100%" height="200" src="http://www.youtube.com/embed/evF_L6Dldb8" frameborder="0" allowfullscreen></iframe></div></a>
+{%endif%} -->
+{%if form_act%}
+<h1>Crea tu propia receta y compartela!</h1>
+<form action="/receta_medico/{{user.id}}" autocomplete="on" method="POST" id="form_receta">
+	{%  csrf_token %}
+	<fieldset id="field">
+        <h1 class="titulos">Titulo de la receta</h1>
+            <h5>Escribe un titulo para tu receta.</h5>
+    		{{form.titulo}}
+        <h1 class="titulos">Ingredientes de la receta</h1>
+            <h5>Escribe los ingredientes necesarios para realizar tu receta. Separalos por comas ( , ): EJEMPLO: Sal<span class="comas">,</span> Maiz<span class="comas">,</span> Pollo<span class="comas">,</span> 1/4 tasa de harina<span class="comas">,</span> etc...</h5>
+            {{form.ingredientes}}
+        <h1 class="titulos">Preparacion de la receta</h1>
+            <h5>Escribe los pasos necesarios para realizar tu receta. Separalos por comas ( , ): EJEMPLO: Primero se corta el pollo por la mitad<span class="comas">,</span> Luego se le agrega los condimentos <span class="comas"> ,</span> etc...</h5>
+            {{form.preparacion}}
+        <h1 class="titulos">Tiempo necesario para preparar la receta</h1>
+            <h5>Escribe un aproximado de tiempo en minutos necesarios para preparar la receta.</h5>
+            {{form.tiempo}}   
+        <h1 class="titulos">Categoria de la receta</h1>
+            <h5>Elige una categoria para tu receta.</h5>        
+		<select id="select1" class="categoria" style="width: 220px; height: 30px; font-size: 14px; text-align: center; padding: 3px; margin: 5px 0px 10px;" name="categoria">
+			<option value="0" disabled="disable">-- Selecciona --</option>
+			{%for x in cat%}
+			<option value="{{x.id}}">{{x.categoria}}</option>
+			{%endfor%}
+			<option value="000">otro</option>
+		</select><div id="otra_categoria" style="position:relative; top:10px; height:60px;"></div>
+        <h1 class="titulos">Foto de tu receta</h1>
+            <h5>Puedes montar una foto de tu plato terminado para que las personas vean como quedara ese magnifico plato.</h5>
+          <input type="file" name="pic" accept="image/*">
+        <h1 class="titulos">Envianos tu receta</h1>
+		<input type="submit" class="blue" value="Enviar receta"/>
+	</fieldset>
+</form>
+{%endif%}
+{%if receta_m%}
+{%for x in receta_m%}
+<a href="/ver_receta_medico/{{x.id}}">
+<div id="post" style="width:auto; height:120px; border:1px solid;margin-top:25px;">
+	<img src="../media/{{doc.photo}}" width="100px" height="100px" style="float:left;margin:10px;"/>
+	<div id="content_post" style="width:600px; float:left;margin:10px; font-size:20px;color:#3D7489;text-align:left; ">
+		{{x.titulo}}
+		<div style="position:relative; bottom:-35px;left:35px;color:#E36F26;text-align:right;">
+			{{x.fecha_publicacion}}
+		</div>
+	</div>
+	
+</div>
+</a>
+{%endfor%}
+{%else%}
+<p style="font-size:37px; color:#3D7489;">Este usuario aun no ha montado niguna RECETA, ¿Te gustaria enviarle un mensaje recomendandole subir alguna noticia? Haz <a href="#" id="recomendarContacto" style="color:#77C01D; font-size:40px;">CLICK AQUI</a> </p>
+{%endif%}
+<script type="text/javascript">
+
+        $('#form_receta').submit(function(ev) { // catch the form's submit event
+            ev.preventDefault();
+            var categoria = $('#select1 option:selected').text()
+            $.ajax({ // create an AJAX call...
+                data: $(this).serialize(), // get the form data
+                type: $(this).attr('method'), // GET or POST
+                url: $(this).attr('action'), // the file to call
+                success: function(response) { // on success..
+                    $('#mostrar_info_perfil').html("<div style='margin-top:37px;color:#77C01D;' ><div style='font-size:20px;'>Felicidades! <br/> Tu receta ha sido creada con exito.</div></div>");                }
+            });
+            return false;
+        });
+
+       $("#select1").change(function(ev) {// catch the form's submit event
+       	ev.preventDefault();
+        	var otro = $("#select1 option:selected").text()
+        	if(otro =="otro"){
+        		campo = "Escribe una nueva categoria: <input type='text' id='otro' placeholder='Escriba la nueva categoria' name='nuevaCategoria' value='' required='True' style='width:230px;'/>"
+        		$('#otra_categoria').fadeOut(1000)
+        		$('#otra_categoria').append(campo)
+        		$('#otra_categoria').fadeIn(1000)
+        	}else{
+        		$('#otro').remove()
+        	}
+
+        });
+
+       $('#recomendarContacto').click(function(ev){   
+            ev.preventDefault();
+        var id_medico = document.getElementById('id_user').value;  
+
+          $.ajax({
+                    url:"/contactar_medico/"+id_medico,
+                    type: "GET",
+                    data: {},
+                    async: false,
+                    success: function(data){
+                        $('#mostrar_info_perfil').fadeOut(1000);
+                        $('#mostrar_info_perfil').html(data)
+                        $('#mostrar_info_perfil').fadeIn(400);
+                    },
+                    error:function (xhr, ajaxOptions, thrownError){
+                        alert(thrownError);
+                    },
+                });
+        });
+     
+
+</script>
+<style type="text/css">
+#post:hover{
+	background-color: #F2F2F2;
+}
+.label_form{
+	margin-right: 20px;
+}
+#form_noticia input{
+	margin-left: 20px;
+}
+.titulos{
+    background-color:#B6D6E2;
+    color:#3D7489;
+    font-size: 2em;
+    text-align: center;
+}
+.comas{
+    color: #CC3333;
+    font-size: 45px;
+}
+</style>

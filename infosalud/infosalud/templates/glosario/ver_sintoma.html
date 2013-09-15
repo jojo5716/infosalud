@@ -1,0 +1,95 @@
+{%extends 'glosario/base_dentro.html' %}
+{% block title%} Sintomas {%endblock%}
+{%block header %}
+
+<link rel="stylesheet" href="/media/css/kickstart-buttons.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart-forms.css" type="text/css"/>
+<link rel="stylesheet" href="/media/css/kickstart-menus.css" type="text/css"/>
+<script type="text/javascript" src="../media/js/recomendar.js"></script>
+<style type="text/css">
+.titulo_glosario{
+	background-color:#B6D6E2;
+  	color:#3D7489;
+  	font-size: 2em;
+  	text-align: center;
+}
+ li:hover{
+	color:#B6D6E2;
+}
+p{
+	text-align: center;
+    word-spacing: 7px;
+}
+.titulos{
+    background-color:#77BB11;
+    color:#fff;
+    font-size: 2em;
+    text-align: center;
+}
+#enfermedad{
+	font-size: 50px;
+	font-weight: bold;
+}
+p:hover{
+	background-color: #F2F2F2;
+}
+
+a:hover{
+	color: #E36F26;
+}
+#titulo_noticia{
+	font-size: 25px;
+}
+</style>
+{%endblock%}
+{%block content%}
+		 	<div id="noticia" style="width:600px; height:auto; margin-top:55px;">
+		 		<div id="titulo_noticia" style="width:600px;margin-left:0;position:relative; top:10px;" >
+					{%for x in sintoma%}
+
+		 			Sintoma:  {{x.nombre}}
+		 		<h1 class="titulo_glosario">Definicion</h1>
+		 		
+		 		<p>{{x.definicion}}</p>
+
+				{%endfor%}
+				<h1 class="titulo_glosario">Enfermedades relacionadas</h1>
+				{%if enfermedad_rel%}
+						{%for x in enfermedad_rel%}
+						<p><a href="/ver_enfermedad/{{x.id}}">	{{x}}</a></p>
+						{%endfor%}
+				{%else%}
+					No hay enfermedades relacionadas.
+				{%endif%}
+		 	</div>	
+		 </div>
+{%endblock%}
+
+{%block apps%}
+<div class="rectangle"><h2>Informacion</h2></div>
+<div class="triangle-l"></div>
+<div class="triangle-r"></div>
+	
+
+	
+	<div class="compartir" style="width:250px; height:100px; border:1px solid; margin:5px 0 0 50px;text-align:center;"><div style="background-color:#f0f0f0; height:20px; width:250px; text-align:center; color:#E36F26;">Votar en redes sociales</div>
+	<div class="herr">
+	<div class="g-plusone" data-href="http://www.infosalud.co.ve/ver_sintoma/{{id_sintoma}}"></div>
+	<div class="fb-like" data-href="http://www.infosalud.co.ve/ver_sintoma/{{id_sintoma}}" data-send="true" data-layout="button_count" data-width="200" data-show-faces="false" data-font="lucida grande"></div>
+	</div>
+	</div>
+
+	<div class="compartir" style="width:250px; height:100px; border:1px solid; margin:5px 0 0 50px;text-align:center;"><div style="background-color:#f0f0f0; height:20px; width:250px; text-align:center; color:#E36F26;">Compartir</div>
+
+	<div class="herr">
+	<a href="" onClick="abrirVentana('http://www.facebook.com/share.php?u=127.0.0.1/noticia/{{noticia.id}}')"><img src="/media/images/facebook.png" alt="infosalud" class="img_redes_sociales"/></a><img src="/media/images/twitter.png" alt="infosalud" class="img_redes_sociales"/>
+	</div>
+	</div>
+
+
+
+{%endblock%}
+
+
+

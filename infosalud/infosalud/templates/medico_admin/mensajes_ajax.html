@@ -1,0 +1,16 @@
+			{%if mensajes%}
+				{%for x in mensajes%}
+					<div class="tl-post comments">
+						<span class="icon">&#59168;</span>
+						<p>
+							<a href="#">{{x.autor}} dice:</a> {{x.mensaje}}
+							<span class="reply"><input type="text" value="Responder mensaje..."/>
+								<a href="">Enviar mensaje</a>
+							</span>
+						</p>
+					</div>
+				{%endfor%}
+				<span class="show-more"><a	 href="#">Mas</a></span>
+				{%else%}
+					No hay mensajes.			
+				{%endif%}

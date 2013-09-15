@@ -1,0 +1,186 @@
+{%extends 'guia/base.html'%}
+{%block title%}{{nombre}}{%endblock%}
+{%block header%}
+<link rel="stylesheet" href="/media/css/kickstart.css" type="text/css"/>
+
+<style type="text/css">
+#infoguia{
+    width: auto;
+    height: auto;
+    margin-top:60px; 
+}
+#barra{
+    float: right;
+    width: 300px;
+    border: 1px solid;
+    height: auto;
+    padding: 10px;
+    border-radius: 7px;
+}
+#barra a{
+    border: 1px solid;
+    padding: 10px;
+
+}
+#barra a:hover{
+    background-color: #F2F2F2;
+}
+.triangle-r{
+    left: 311px;
+}
+.triangle-l{
+    left: -41px;
+}
+.rectangle{
+    width: 352px;
+    left: -26px;
+}
+#imagen_planta{
+	float: left;
+
+}
+#imagen_planta img{
+	width: 300px;
+	height: 300px;
+	border-radius: 199px;
+}
+#nombre_planta{
+	text-align: center;
+	font-size: 32px;
+}
+.titulo{
+    background-color:#B6D6E2;
+    color:#3D7489;
+    font-size: 2em;
+    text-align: center;
+
+}
+#info_planta{
+    float: right;
+    padding: 15px;
+    width: 340px;
+}
+#otra_info{
+	width: 670px;
+	float: left;
+}
+#otra_info p{
+	text-align: center;
+	margin: 10px;
+	font-size: 28px;
+}
+.sub_titulo{
+text-align: center;	
+color: #77C01D;
+}
+.sub_formas{
+	text-align: center;
+}
+#propiedades{
+	text-align: center;
+	color: #3D7489;
+}
+.compartir{
+	text-align: center;
+}
+#barra li{
+display:block;
+  float:left;
+  margin:20px 1px 1px;
+}
+</style>
+
+{%endblock%}
+{%block content%}
+   <div id="infoguia">
+    <div id="barra">
+<div class="rectangle"><h2>Datos adicionales</h2></div>
+<div class="triangle-l"></div>
+<div class="triangle-r"></div>
+<p>Puedes revisar plantas con propiedades similares a esta: </p>
+<ul>
+{%for x in tags%}
+	<li><a href="/plantas/seccion/{{x.id}}">{{x}}</a><li>
+{%endfor%}
+</ul>
+<hr class="alt2" />
+
+<h1 class="titulo">Compartir</h1>
+<div class="compartir">
+<img src="/media/images/facebook.png/">
+<img src="/media/images/twitter.png/">
+</div>
+<h1 class="titulo">Votar</h1>
+<div class="compartir">
+
+	<div class="g-plusone" data-href="http://www.infosalud.co.ve/planta/{{id}}/"></div><br/>
+	<div class="fb-like" data-href="http://www.infosalud.co.ve/planta/{{id}}/" data-send="true" data-layout="button_count" data-width="200" data-show-faces="false" data-font="lucida grande"></div>
+</div>
+</div>
+{%for x in planta%}
+<div id="imagen_planta">
+<img src="/media/{{x.Imagen}}" alt="{{x.nombre}}"/>
+</div>
+<div id="nombre_planta">
+	{{x.nombre}}
+</div>
+<div id="info_planta">
+	<h2 id="propiedades">Propiedades</h2>
+<p style="font-size:20px;">{{x.propiedades}}</p>
+</div>
+<div id="otra_info">
+<h1 class="titulo">Cultivo</h1>
+<p>{{x.cultivo}}</p>
+<h1 class="titulo">Formas de uso</h1>
+{%for y in formas%}
+<h2 class="sub_titulo">{{y.titulo}}</h2>
+	<p class="sub_formas">{{y.contenido}}</p>
+	
+{%endfor%}
+<h1 class="titulo">Tambien sirve para</h1>
+<ul class="checks">
+{%for x in tags%}
+<p>
+<li style="font-size:25px;"><a href="">{{x}}</a></li>
+</p>
+{%endfor%}
+</ul>
+<h1 class="titulo">Comenta</h1>
+
+</div>
+
+{%if user.is_authenticated%}
+
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'plantas'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+     <script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'plantas'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    
+
+{%else%}
+<h1 style="width:600px; color:#3D7489;">Para poder comentar esta noticia debes estar registrado en InfoSalud. Si aún no lo estas puedes hacerlo haciendo <a href="">click aqui</a> </h1>
+{%endif%}
+   </div>
+  {%endfor%}
+{%endblock%}

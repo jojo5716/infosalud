@@ -1,0 +1,35 @@
+{% extends 'guia/base.html' %}
+{% block title %}Elige tu tipo de Perfil{% endblock %}
+{%block header%}
+<link rel="stylesheet" href="/media/css/kickstart.css" type="text/css"/>
+
+<style type="text/css">
+#tipo{
+	width: auto;
+    height: auto;
+    margin-top:60px;
+}
+#tipo h1{
+	text-align: center;
+	color:#3D7489;
+}
+#tipo h1 span{
+	color:#E36F26;
+}
+#standard{
+	margin-right: 385px;
+}
+</style>
+{%endblock%}
+{% block content %}
+
+<div id="tipo">
+	<h1>Selecciona el tipo de <span>USUARIO</span> que quieres <span>REGISTRAR</span></h1>
+<hr class="alt2"/>
+
+<a href="/registro/standard/"><img src="/media/images/registro_standard.png" id="standard"/></a>
+<a href="/registro/doctor/"><img src="/media/images/registro_medico.png" /></a>
+
+</div>
+
+{% endblock %}
