@@ -24,3 +24,8 @@ infosalud 1.0
 
 
 </ul>
+<hr/>
+
+<p>Las noticias puedes compartirlas en redes sociales</p>
+<p>Si visitas un síntoma te muestra enfermedades relacionadas a esos síntomas</p>
+<p>Al visitar una enfermedad y ver su informacion ves los sintomas que tiene</p>
